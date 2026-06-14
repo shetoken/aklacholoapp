@@ -1,0 +1,10 @@
+{
+  "// note": "Recommended extensions for this Expo/RN/NativeWind/TS project. Cursor and VS Code both read this and offer to install them.",
+  "recommendations": [
+    "bradlc.vscode-tailwindcss",
+    "expo.vscode-expo-tools",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "msjsdiag.vscode-react-native"
+  ]
+}

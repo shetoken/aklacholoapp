@@ -1,0 +1,17 @@
+{
+  "// note": "Enables Tailwind/NativeWind IntelliSense for className in .tsx (autocompletes brand classes like bg-brand-primary). Safe defaults for Cursor/VS Code.",
+  "tailwindCSS.experimental.configFile": "tailwind.config.js",
+  "tailwindCSS.classAttributes": ["class", "className", "tw"],
+  "tailwindCSS.includeLanguages": {
+    "typescript": "javascript",
+    "typescriptreact": "javascript"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
+}

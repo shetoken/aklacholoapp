@@ -1,0 +1,62 @@
+---
+description: AklaCholo project conventions, stack, and gotchas — always applied
+globs:
+alwaysApply: true
+---
+
+# AklaCholo — project rules for AI assistance
+
+AklaCholo ("Bengal, Everywhere") is a global Bengali creative lifestyle **native
+app** (iOS + Android) built with Expo. This repo is **Phase 1: the Discovery
+App**. All navigation labels are plain English (global audience); the Bengali
+soul lives in the brand name and content. Read `README.md` for the full picture.
+
+## Stack — pinned, mutually compatible (Expo SDK 54). Do NOT bump casually.
+- expo 54, react 19.1, react-native 0.81.x, expo-router 6
+- react-native-reanimated **4.x** + **react-native-worklets** 0.5.x
+  (Reanimated 4 split worklets into its own package; requires New Architecture —
+  `newArchEnabled: true` in app.json)
+- nativewind 4.2.x (react-native-css-interop 0.2.x)
+- **Always add native deps with `npx expo install <pkg>`** so versions stay
+  SDK-compatible. Never hand-edit native package versions in package.json.
+
+## Architecture conventions (follow these)
+- **Screens never import from `src/data`.** Always go through `src/services/*`.
+  Services return Promises with mock latency today; the real API drops in by
+  implementing `httpGet` / flipping `USE_MOCK` in `src/services/api.client.ts`.
+  Adding data access = add/extend a service, not a screen-level import.
+- **Theme tokens live once** in `src/theme/tokens.js` (plain JS), consumed by
+  BOTH `tailwind.config.js` and `src/theme/index.ts`. Change brand colors there.
+- **Typography** goes through `<AppText variant="...">` — don't hardcode
+  `fontFamily`. Serif = Fraunces (headings), sans = Inter (body).
+- **Styling** is NativeWind classNames on core RN components. Third-party
+  components (SafeAreaView, MotiView, expo-image) do NOT get className — style
+  them via `style`/wrappers (see `src/components/ui/Screen.tsx`, `Img.tsx`).
+- **`<Link asChild>`** (expo-router) requires a *pressable* immediate child
+  (`Pressable` / `MotiPressable`), never a plain `View`, or taps won't navigate.
+- **Images** go through the `Img` component + `src/constants/images.ts`
+  placeholder helper. Swap that helper (or service `ImageRef.uri`) for real art.
+- **"Magic of Bengal" articles** (`src/data/articles.ts`) are retrieval-ready:
+  each `Article` has a `summary` and `sections[]` with **stable section ids**.
+  Preserve this shape — Phase 1.5 grounded chat retrieves/cites on it
+  (`getArticleChunks`, `searchArticleChunks` in articles.service.ts).
+
+## Gotchas — these are intentional, do NOT "fix" them
+- `babel-preset-expo` is an **explicit devDependency** (SDK 54 doesn't hoist it;
+  Metro fails "Cannot find module 'babel-preset-expo'" without it).
+- `app.json` `web.output: "single"` (SPA). Static/SSR web render crashes on
+  framer-motion (pulled in by `moti` for web) under React 19. Native unaffected.
+- `babel.config.js`: do NOT manually add the reanimated/worklets babel plugin —
+  `babel-preset-expo` and `nativewind/babel` add `react-native-worklets/plugin`
+  automatically. Manual entry causes duplicate-plugin errors.
+- If `expo start` fails with "fetch failed" (can't reach api.expo.dev), run
+  `npx expo start --offline`.
+
+## Verify before claiming done
+- `npx tsc --noEmit`
+- `npx expo export --platform ios` and `--platform android` (catches babel /
+  NativeWind / Reanimated / import errors a typecheck can't). CI runs these too.
+
+## Out of scope for Phase 1 (don't build unless explicitly asked)
+Shop/commerce, marketplace/gigs, classes, Bengal-in-a-Box, AI stylist, and the
+Phase 1.5 grounded chat. Each has a documented plug-in point in `README.md`.
