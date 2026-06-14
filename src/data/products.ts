@@ -1,0 +1,201 @@
+import type { Product } from '@/types';
+import { img } from '@/constants/images';
+
+/**
+ * Product / design catalogue. `priceLabel` is display-only — there is NO
+ * commerce in Phase 1. Cross-reference IDs power every "related" link.
+ */
+export const products: Product[] = [
+  {
+    id: 'prod_kantha_throw',
+    title: 'Nakshi Kantha Throw',
+    subtitle: 'Hand-stitched cotton, Shantiniketan',
+    category: 'Living',
+    images: [
+      img('kantha-throw-1', 'Folded kantha throw', { aspectRatio: 0.8 }),
+      img('kantha-throw-2', 'Kantha stitch detail', { aspectRatio: 1 }),
+      img('kantha-throw-3', 'Throw draped on chair', { aspectRatio: 0.75 }),
+    ],
+    story:
+      'Six layers of reclaimed cotton sari, bound by tens of thousands of running stitches. The wandering vine of kolka buds is drawn freehand — no two throws are ever identical.',
+    creatorId: 'creator_anjali',
+    collectionIds: ['col_kantha_revival', 'col_everyday_bengal'],
+    relatedProductIds: ['prod_kantha_cushion', 'prod_kantha_scarf'],
+    relatedArticleIds: ['art_kantha', 'art_kolka'],
+    motifIds: ['motif_vine_kolka'],
+    priceLabel: '₹ 4,800',
+    tags: ['kantha', 'handmade', 'cotton', 'quilt'],
+  },
+  {
+    id: 'prod_kantha_cushion',
+    title: 'Kantha Cushion Cover',
+    subtitle: 'Running-stitch motif on natural cotton',
+    category: 'Living',
+    images: [
+      img('kantha-cushion-1', 'Kantha cushion', { aspectRatio: 1 }),
+      img('kantha-cushion-2', 'Cushion stitch detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'A single lotus-kolka medallion worked in marigold thread, framed by a fish border — the folk symbols of abundance.',
+    creatorId: 'creator_anjali',
+    collectionIds: ['col_kantha_revival'],
+    relatedProductIds: ['prod_kantha_throw'],
+    relatedArticleIds: ['art_kantha'],
+    motifIds: ['motif_lotus_kolka'],
+    priceLabel: '₹ 1,600',
+    tags: ['kantha', 'cushion', 'handmade'],
+  },
+  {
+    id: 'prod_kantha_scarf',
+    title: 'Kantha Silk Scarf',
+    subtitle: 'Lightweight stitched silk',
+    category: 'Wearables',
+    images: [
+      img('kantha-scarf-1', 'Kantha silk scarf', { aspectRatio: 0.7 }),
+      img('kantha-scarf-2', 'Scarf border detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'Gossamer silk carrying a fine kantha border. Light enough for summer, the kolka edge catches the light as it moves.',
+    creatorId: 'creator_anjali',
+    collectionIds: ['col_kantha_revival'],
+    relatedProductIds: ['prod_kantha_throw', 'prod_indigo_scarf'],
+    relatedArticleIds: ['art_kantha', 'art_kolka'],
+    motifIds: ['motif_border_kolka'],
+    priceLabel: '₹ 2,200',
+    tags: ['kantha', 'silk', 'scarf', 'wearable'],
+  },
+  {
+    id: 'prod_terracotta_panel',
+    title: 'Bishnupur Relief Panel',
+    subtitle: 'Wood-fired temple terracotta',
+    category: 'Wall Art',
+    images: [
+      img('terracotta-panel-1', 'Terracotta relief panel', { aspectRatio: 1.3 }),
+      img('terracotta-panel-2', 'Relief carving detail', { aspectRatio: 1 }),
+      img('terracotta-panel-3', 'Panel mounted on wall', { aspectRatio: 1.2 }),
+    ],
+    story:
+      'A lotus medallion pressed and carved in the red clay of Bishnupur, then wood-fired — the same method that decorated the town’s 17th-century temples.',
+    creatorId: 'creator_rahim',
+    collectionIds: ['col_terracotta_tales'],
+    relatedProductIds: ['prod_terracotta_planter', 'prod_motif_print'],
+    relatedArticleIds: ['art_terracotta', 'art_kolka'],
+    motifIds: ['motif_lotus_kolka'],
+    priceLabel: '₹ 6,500',
+    tags: ['terracotta', 'wall art', 'temple', 'handmade'],
+  },
+  {
+    id: 'prod_terracotta_planter',
+    title: 'Terracotta Kolka Planter',
+    subtitle: 'Carved red-clay vessel',
+    category: 'Living',
+    images: [
+      img('terracotta-planter-1', 'Terracotta planter', { aspectRatio: 0.9 }),
+      img('terracotta-planter-2', 'Carved planter detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'A planter banded with a repeating border kolka, unglazed so it breathes with the soil — clay returning to its oldest purpose.',
+    creatorId: 'creator_rahim',
+    collectionIds: ['col_terracotta_tales', 'col_everyday_bengal'],
+    relatedProductIds: ['prod_terracotta_panel'],
+    relatedArticleIds: ['art_terracotta'],
+    motifIds: ['motif_border_kolka'],
+    priceLabel: '₹ 1,900',
+    tags: ['terracotta', 'planter', 'home'],
+  },
+  {
+    id: 'prod_motif_print',
+    title: 'Animated Kolka Art Print',
+    subtitle: 'Giclée print from a digital loop',
+    category: 'Wall Art',
+    images: [
+      img('motif-print-1', 'Kolka art print', { aspectRatio: 0.8 }),
+      img('motif-print-2', 'Print framed', { aspectRatio: 1 }),
+    ],
+    story:
+      'A single frame from Meera’s animated kolka loop, rendered as a fine-art print — the village motif reborn in pixels and pigment.',
+    creatorId: 'creator_meera',
+    collectionIds: ['col_modern_kolka'],
+    relatedProductIds: ['prod_stationery_set', 'prod_terracotta_panel'],
+    relatedArticleIds: ['art_kolka'],
+    motifIds: ['motif_classic_kolka'],
+    priceLabel: '₹ 2,400',
+    tags: ['digital', 'print', 'modern', 'kolka'],
+  },
+  {
+    id: 'prod_stationery_set',
+    title: 'Kolka Stationery Set',
+    subtitle: 'Notebook + card set',
+    category: 'Stationery',
+    images: [
+      img('stationery-1', 'Kolka stationery set', { aspectRatio: 1.1 }),
+      img('stationery-2', 'Notebook cover detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'A bound notebook and card set printed with Meera’s generative kolka borders — heritage pattern for the everyday desk.',
+    creatorId: 'creator_meera',
+    collectionIds: ['col_modern_kolka', 'col_everyday_bengal'],
+    relatedProductIds: ['prod_motif_print'],
+    relatedArticleIds: ['art_kolka'],
+    motifIds: ['motif_classic_kolka', 'motif_vine_kolka'],
+    priceLabel: '₹ 950',
+    tags: ['stationery', 'paper', 'modern'],
+  },
+  {
+    id: 'prod_dokra_bowl',
+    title: 'Dokra Brass Bowl',
+    subtitle: 'Lost-wax cast brass',
+    category: 'Kitchen',
+    images: [
+      img('dokra-bowl-1', 'Dokra brass bowl', { aspectRatio: 1 }),
+      img('dokra-bowl-2', 'Brass texture detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'Modelled in wax thread and cast in a single pour, this bowl carries the fingerprint texture that only lost-wax dokra can give.',
+    creatorId: 'creator_sukanta',
+    collectionIds: ['col_everyday_bengal'],
+    relatedProductIds: ['prod_kolka_mug'],
+    relatedArticleIds: [],
+    motifIds: ['motif_classic_kolka'],
+    priceLabel: '₹ 3,100',
+    tags: ['dokra', 'brass', 'metal', 'kitchen'],
+  },
+  {
+    id: 'prod_kolka_mug',
+    title: 'Kolka Glaze Mug',
+    subtitle: 'Hand-thrown stoneware',
+    category: 'Kitchen',
+    images: [
+      img('kolka-mug-1', 'Kolka glazed mug', { aspectRatio: 0.9 }),
+      img('kolka-mug-2', 'Mug glaze detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'Stoneware brushed with a single freehand kolka in indigo glaze — a quiet morning ritual in your hands.',
+    creatorId: 'creator_rahim',
+    collectionIds: ['col_everyday_bengal'],
+    relatedProductIds: ['prod_dokra_bowl'],
+    relatedArticleIds: ['art_kolka'],
+    motifIds: ['motif_classic_kolka'],
+    priceLabel: '₹ 750',
+    tags: ['ceramic', 'mug', 'kitchen'],
+  },
+  {
+    id: 'prod_indigo_scarf',
+    title: 'Indigo Block-Print Stole',
+    subtitle: 'Natural-dye cotton',
+    category: 'Wearables',
+    images: [
+      img('indigo-scarf-1', 'Indigo block-print stole', { aspectRatio: 0.7 }),
+      img('indigo-scarf-2', 'Block print detail', { aspectRatio: 1 }),
+    ],
+    story:
+      'Cotton dipped in true Bengal indigo and block-printed with a vine kolka — the deep blue that once made this delta famous across the world.',
+    creatorId: 'creator_meera',
+    collectionIds: ['col_modern_kolka'],
+    relatedProductIds: ['prod_kantha_scarf'],
+    relatedArticleIds: ['art_kolka'],
+    motifIds: ['motif_vine_kolka'],
+    priceLabel: '₹ 1,800',
+    tags: ['indigo', 'block print', 'scarf', 'wearable'],
+  },
+];

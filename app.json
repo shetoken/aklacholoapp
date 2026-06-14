@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "AklaCholo",
+    "slug": "aklacholo",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "aklacholo",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "backgroundColor": "#F7F0E3",
+      "resizeMode": "contain"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.aklacholo.app"
+    },
+    "android": {
+      "package": "com.aklacholo.app",
+      "adaptiveIcon": {
+        "backgroundColor": "#C45A3B"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "static"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#F7F0E3",
+          "resizeMode": "contain"
+        }
+      ],
+      "expo-asset"
+    ],
+    "experiments": {
+      "typedRoutes": false
+    }
+  }
+}
