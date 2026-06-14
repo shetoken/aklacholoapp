@@ -151,7 +151,8 @@ No article data needs to change — the shape was designed for this.
 ## How future phases plug in
 
 Everything below is intentionally **not** built in Phase 1. The scaffold is
-structured so each is an additive module, not a rewrite.
+structured so each is an additive module, not a rewrite. For **concrete,
+file-level steps** per phase, see [docs/ROADMAP.md](docs/ROADMAP.md).
 
 | Future phase                | Where it plugs in                                                                 |
 | --------------------------- | --------------------------------------------------------------------------------- |
