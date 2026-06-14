@@ -9,7 +9,14 @@ alwaysApply: true
 AklaCholo ("Bengal, Everywhere") is a global Bengali creative lifestyle **native
 app** (iOS + Android) built with Expo. This repo is **Phase 1: the Discovery
 App**. All navigation labels are plain English (global audience); the Bengali
-soul lives in the brand name and content. Read `README.md` for the full picture.
+soul lives in the brand name and content.
+
+**Brand context (read first):** `docs/Brand.md` is the source of truth for what
+AklaCholo is — vision, values (the five pillars: Culture, Creativity, Community,
+Commerce, Technology), and what the app is / isn't. Keep features, copy, and
+tone aligned with it: calm, immersive, premium; heritage craft meets modern
+minimalism; discovery-first, not transactional. `README.md` covers architecture;
+`docs/ROADMAP.md` covers the phase-by-phase build plan.
 
 ## Stack — pinned, mutually compatible (Expo SDK 54). Do NOT bump casually.
 - expo 54, react 19.1, react-native 0.81.x, expo-router 6

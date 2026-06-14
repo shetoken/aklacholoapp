@@ -10,6 +10,10 @@ Bengali craft_: heritage craft meets modern minimalism.
 > The Bengali soul lives in the brand name and the content. **All navigation
 > labels are plain English** — no pronunciation friction for a global audience.
 
+📖 **New here? Start with [docs/Brand.md](docs/Brand.md)** — the full "What is
+AklaCholo?" (vision, values, what the app is / isn't). Then see
+[docs/ROADMAP.md](docs/ROADMAP.md) for the phase-by-phase build plan.
+
 ---
 
 ## Tech stack
