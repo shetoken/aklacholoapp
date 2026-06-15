@@ -169,7 +169,7 @@ export function PillarHeader({
         </View>
 
         {isGuest ? (
-          <View className="flex-row gap-sm mt-xs shrink-0">
+          <View className="flex-row flex-wrap justify-end gap-sm mt-xs shrink-0 max-w-[280px]">
             <Link href="/sign-in" asChild>
               <Pressable
                 className="rounded-full px-md py-sm"
@@ -197,25 +197,55 @@ export function PillarHeader({
                 </AppText>
               </Pressable>
             </Link>
+            <Link href="/creator-apply" asChild>
+              <Pressable
+                className="rounded-full px-md py-sm"
+                style={{
+                  backgroundColor: onDark ? brand.surface : colors.cream[50],
+                  borderWidth: 1,
+                  borderColor: brand.marigold,
+                }}
+              >
+                <AppText variant="label" className="text-brand-marigold">
+                  Apply
+                </AppText>
+              </Pressable>
+            </Link>
           </View>
         ) : (
-          <Link href="/account" asChild>
-            <Pressable
-              className="rounded-full px-md py-sm mt-xs shrink-0"
-              style={{
-                backgroundColor: onDark ? brand.surface : colors.cream[50],
-                borderWidth: 1,
-                borderColor: onDark ? `${brand.ivory}33` : colors.cream[400],
-              }}
-            >
-              <AppText
-                variant="label"
-                className={onDark ? 'text-brand-marigold' : 'text-brand-primary'}
+          <View className="flex-row gap-sm mt-xs shrink-0">
+            <Link href="/creator-apply" asChild>
+              <Pressable
+                className="rounded-full px-md py-sm"
+                style={{
+                  backgroundColor: onDark ? brand.surface : colors.cream[50],
+                  borderWidth: 1,
+                  borderColor: brand.marigold,
+                }}
               >
-                {user?.displayName.split(' ')[0]}
-              </AppText>
-            </Pressable>
-          </Link>
+                <AppText variant="label" className="text-brand-marigold">
+                  Apply
+                </AppText>
+              </Pressable>
+            </Link>
+            <Link href="/account" asChild>
+              <Pressable
+                className="rounded-full px-md py-sm shrink-0"
+                style={{
+                  backgroundColor: onDark ? brand.surface : colors.cream[50],
+                  borderWidth: 1,
+                  borderColor: onDark ? `${brand.ivory}33` : colors.cream[400],
+                }}
+              >
+                <AppText
+                  variant="label"
+                  className={onDark ? 'text-brand-marigold' : 'text-brand-primary'}
+                >
+                  {user?.displayName.split(' ')[0]}
+                </AppText>
+              </Pressable>
+            </Link>
+          </View>
         )}
       </View>
 

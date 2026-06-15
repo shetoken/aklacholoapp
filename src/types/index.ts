@@ -56,6 +56,60 @@ export interface Creator {
 }
 
 // ----------------------------------------------------------------------------
+// Creator onboarding — applications & scouting (not public until published)
+// ----------------------------------------------------------------------------
+export type CreatorApplicationStatus =
+  | 'submitted'
+  | 'in_review'
+  | 'interview_scheduled'
+  | 'sample_requested'
+  | 'sample_ordered'
+  | 'approved'
+  | 'declined'
+  | 'published'
+  | 'suspended';
+
+/** `application` = self-serve form; `scouted` = founder-added (e.g. Instagram). */
+export type CreatorSource = 'application' | 'scouted';
+
+export interface CreatorApplicationInput {
+  name: string;
+  email: string;
+  phone?: string;
+  discipline: string;
+  disciplineType: DisciplineType;
+  region: BengalRegion;
+  bio: string;
+  story?: string;
+  instagramUrl?: string;
+  portfolioUrl?: string;
+  /** What they could send for a vetting sample order. */
+  sampleDescription?: string;
+}
+
+export interface CreatorApplication extends CreatorApplicationInput {
+  id: ID;
+  source: CreatorSource;
+  status: CreatorApplicationStatus;
+  submittedAt: number;
+  updatedAt: number;
+  /** Internal — founder notes (calls, sample order refs, vision fit). */
+  adminNotes?: string;
+  /** When source is scouted — e.g. "@weaver.kolkata". */
+  scoutedFrom?: string;
+}
+
+export interface ScoutedCreatorInput extends CreatorApplicationInput {
+  scoutedFrom: string;
+  adminNotes?: string;
+  /** Scouted creators can skip straight to review or approved. */
+  status?: Extract<
+    CreatorApplicationStatus,
+    'in_review' | 'approved' | 'sample_requested'
+  >;
+}
+
+// ----------------------------------------------------------------------------
 // Product / Design
 // ----------------------------------------------------------------------------
 export interface Product {

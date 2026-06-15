@@ -76,23 +76,35 @@ export default function AccountScreen() {
                 Sign in to sync saved pieces, book classes, and hire creators.
                 You can browse everything as a guest.
               </AppText>
-              <Link href="/sign-in" asChild>
-                <Pressable
-                  className="mt-lg rounded-xl py-md items-center"
-                  style={{ backgroundColor: brand.marigold }}
-                >
-                  <AppText variant="label" style={{ color: brand.ink }}>
-                    Sign in
-                  </AppText>
-                </Pressable>
-              </Link>
-              <Link href="/sign-up" asChild>
-                <Pressable className="mt-md py-md items-center rounded-xl border border-brand-border">
-                  <AppText variant="label" className="text-brand-ivory">
-                    Create account
-                  </AppText>
-                </Pressable>
-              </Link>
+              <View className="flex-row flex-wrap gap-sm mt-lg">
+                <Link href="/sign-in" asChild>
+                  <Pressable
+                    className="rounded-full px-lg py-md"
+                    style={{ backgroundColor: brand.marigold }}
+                  >
+                    <AppText variant="label" style={{ color: brand.ink }}>
+                      Sign in
+                    </AppText>
+                  </Pressable>
+                </Link>
+                <Link href="/sign-up" asChild>
+                  <Pressable className="rounded-full px-lg py-md border border-brand-border">
+                    <AppText variant="label" className="text-brand-ivory">
+                      Sign up
+                    </AppText>
+                  </Pressable>
+                </Link>
+                <Link href="/creator-apply" asChild>
+                  <Pressable
+                    className="rounded-full px-lg py-md border"
+                    style={{ borderColor: brand.marigold }}
+                  >
+                    <AppText variant="label" className="text-brand-marigold">
+                      Apply
+                    </AppText>
+                  </Pressable>
+                </Link>
+              </View>
               <AppText variant="caption" className="mt-sm text-center">
                 Phase 1 stub — Apple & Google auth in Phase 2
               </AppText>
@@ -103,12 +115,24 @@ export default function AccountScreen() {
               <AppText variant="caption" className="mt-xs">
                 {user?.email}
               </AppText>
-              <Pressable
-                onPress={signOut}
-                className="mt-lg rounded-xl border border-brand-border py-md items-center"
-              >
-                <AppText variant="label">Sign out</AppText>
-              </Pressable>
+              <View className="flex-row flex-wrap gap-sm mt-lg">
+                <Pressable
+                  onPress={signOut}
+                  className="rounded-full px-lg py-md border border-brand-border"
+                >
+                  <AppText variant="label">Sign out</AppText>
+                </Pressable>
+                <Link href="/creator-apply" asChild>
+                  <Pressable
+                    className="rounded-full px-lg py-md border"
+                    style={{ borderColor: brand.marigold }}
+                  >
+                    <AppText variant="label" className="text-brand-marigold">
+                      Apply
+                    </AppText>
+                  </Pressable>
+                </Link>
+              </View>
             </>
           )}
         </View>

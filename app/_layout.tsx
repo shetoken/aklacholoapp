@@ -128,6 +128,18 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: 'Terms of Use' }}
               />
               <Stack.Screen
+                name="creator-apply"
+                options={{ headerShown: true, title: 'Apply as creator' }}
+              />
+              <Stack.Screen
+                name="creator-apply-sent"
+                options={{ headerShown: true, title: 'Application received' }}
+              />
+              <Stack.Screen
+                name="admin-applications"
+                options={{ headerShown: true, title: 'Creator pipeline' }}
+              />
+              <Stack.Screen
                 name="preferences-onboarding"
                 options={{ headerShown: true, title: 'Your preferences' }}
               />

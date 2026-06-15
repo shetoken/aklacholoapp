@@ -47,3 +47,11 @@ export async function httpGet<T>(path: string): Promise<T> {
       `Set USE_MOCK=true or implement httpGet for Phase 2+.`,
   );
 }
+
+/** Placeholder for POST endpoints (applications, checkout, etc.). */
+export async function httpPost<T>(path: string, body: unknown): Promise<T> {
+  throw new Error(
+    `Real API not implemented yet (POST ${API_BASE_URL}${path}). ` +
+      `Set USE_MOCK=true or implement httpPost for Phase 2+.`,
+  );
+}

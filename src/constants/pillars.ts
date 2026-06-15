@@ -23,7 +23,7 @@ export const PILLARS: Pillar[] = [
     label: 'Discover',
     title: 'Discover Bengal',
     subtitle:
-      'Three hundred million Bengalis. A civilization of her own — with her own language, literature, cinema, and philosophy, her own way of seeing the world. Once called the Golden Bengal — Sonar Bangla — her muslin woven for emperors and queens, her wealth the prize Europe came to claim. She has endured famine, Partition, and attempts to erase her very name — and still she creates, with the spirit that gave the world poets and Nobel laureates, scientists and filmmakers, and thought that runs ahead of its time. Too often her brilliance is folded into a single story of the East. Bengal has her own voice and her own beauty — and it\'s time the world heard her, and saw her, in full. Center stage.',
+      'Three hundred million Bengalis. A civilization of her own — with her own language, literature, cinema, and philosophy, her own way of seeing the world. Once called the Golden Bengal — Sonar Bangla — her muslin woven for emperors and queens, her wealth the prize Europe came to claim. She has endured famine, Partition, and attempts to erase her very name — and still she creates, with the spirit that gave the world poets and Nobel laureates, scientists and filmmakers, and thought that runs ahead of its time. Too often her brilliance is folded into a single story of the East. Bengal has her own voice and her own beauty — and it\'s time the world heard her, and saw her, in her own narrative. Center stage.',
     cta: 'Browse stories',
     href: '/explore',
     accent: 'marigold',

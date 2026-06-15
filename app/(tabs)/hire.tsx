@@ -17,6 +17,7 @@ import { Tag } from '@/components/ui/Tag';
 import { ChevronRight } from '@/components/ui/icons';
 import { useAsync } from '@/hooks/useAsync';
 import { filterCreators, getCreators } from '@/services';
+import { CREATOR_ONBOARDING } from '@/content/creator-onboarding';
 import type { Creator, DisciplineType } from '@/types';
 import { brand } from '@/theme';
 
@@ -169,6 +170,18 @@ export default function HireScreen() {
                 Booking and commissions open in a future release — browse portfolios
                 now.
               </AppText>
+              <View className="mt-lg items-center">
+                <AppText variant="caption" className="text-center">
+                  {CREATOR_ONBOARDING.hireCta}
+                </AppText>
+                <Link href="/creator-apply" asChild>
+                  <Pressable className="mt-sm py-sm">
+                    <AppText variant="label" className="text-brand-marigold">
+                      {CREATOR_ONBOARDING.hireCtaLink}
+                    </AppText>
+                  </Pressable>
+                </Link>
+              </View>
             </View>
           )}
         </>
