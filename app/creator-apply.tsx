@@ -12,14 +12,23 @@ import { Link, Stack, useRouter } from 'expo-router';
 
 import { Screen, AppText, KolkaDivider } from '@/components';
 import { AuthFormField } from '@/components/ui/AuthFormField';
+import { DisciplinePicker } from '@/components/ui/DisciplinePicker';
+import { ShopAddressFields } from '@/components/ui/ShopAddressFields';
 import { Tag } from '@/components/ui/Tag';
 import { CREATOR_ONBOARDING } from '@/content/creator-onboarding';
 import {
   BENGAL_REGIONS,
   DISCIPLINE_TYPES,
+  disciplineToType,
+  type CreatorDiscipline,
 } from '@/constants/creator-onboarding';
+import {
+  buildShopAddress,
+  EMPTY_SHOP_ADDRESS,
+  isShopAddressComplete,
+} from '@/constants/shop-address';
 import { submitCreatorApplication } from '@/services';
-import type { BengalRegion, DisciplineType } from '@/types';
+import type { BengalRegion, DisciplineType, ShopAddress } from '@/types';
 import { brand } from '@/theme';
 
 function MultilineField({
@@ -71,7 +80,7 @@ export default function CreatorApplyScreen() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-  const [discipline, setDiscipline] = useState('');
+  const [discipline, setDiscipline] = useState<CreatorDiscipline | null>(null);
   const [disciplineType, setDisciplineType] = useState<DisciplineType>('physical');
   const [region, setRegion] = useState<BengalRegion>('Kolkata');
   const [bio, setBio] = useState('');
@@ -79,6 +88,7 @@ export default function CreatorApplyScreen() {
   const [instagramUrl, setInstagramUrl] = useState('');
   const [portfolioUrl, setPortfolioUrl] = useState('');
   const [sampleDescription, setSampleDescription] = useState('');
+  const [shopAddress, setShopAddress] = useState<ShopAddress>(EMPTY_SHOP_ADDRESS);
   const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
@@ -87,7 +97,7 @@ export default function CreatorApplyScreen() {
 
     const trimmedName = name.trim();
     const trimmedEmail = email.trim();
-    const trimmedDiscipline = discipline.trim();
+    const trimmedDiscipline = discipline;
     const trimmedBio = bio.trim();
 
     if (!trimmedName || !trimmedEmail || !trimmedDiscipline || !trimmedBio) {
@@ -101,6 +111,14 @@ export default function CreatorApplyScreen() {
       const msg = 'Enter a valid email so we can reach you.';
       setError(msg);
       showNotice('Check your email', msg);
+      return;
+    }
+
+    if (disciplineType === 'physical' && !isShopAddressComplete(shopAddress)) {
+      const msg =
+        'Physical shops need town, state, zip code, and country.';
+      setError(msg);
+      showNotice('Shop location', msg);
       return;
     }
 
@@ -121,6 +139,7 @@ export default function CreatorApplyScreen() {
         instagramUrl: instagramUrl.trim() || undefined,
         portfolioUrl: portfolioUrl.trim() || undefined,
         sampleDescription: sampleDescription.trim() || undefined,
+        shopAddress: buildShopAddress(disciplineType, shopAddress),
       });
 
       router.replace(
@@ -184,13 +203,13 @@ export default function CreatorApplyScreen() {
             placeholder="+1 or +91…"
             keyboardType="default"
           />
-          <AuthFormField
-            label="Discipline"
+          <DisciplinePicker
             value={discipline}
-            onChangeText={setDiscipline}
-            placeholder="e.g. Kantha artisan, 3D motion designer"
+            onChange={(next) => {
+              setDiscipline(next);
+              setDisciplineType(disciplineToType(next));
+            }}
           />
-
           <AppText variant="label" className="mb-sm text-brand-ivory-soft">
             Type
           </AppText>
@@ -220,6 +239,10 @@ export default function CreatorApplyScreen() {
               </Pressable>
             ))}
           </ScrollView>
+
+          {disciplineType === 'physical' ? (
+            <ShopAddressFields value={shopAddress} onChange={setShopAddress} />
+          ) : null}
 
           <MultilineField
             label="Short bio"

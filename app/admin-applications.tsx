@@ -11,13 +11,23 @@ import { Stack } from 'expo-router';
 
 import { Screen, AppText, Loading, ErrorView, EmptyState } from '@/components';
 import { AuthFormField } from '@/components/ui/AuthFormField';
+import { DisciplinePicker } from '@/components/ui/DisciplinePicker';
+import { ShopAddressFields } from '@/components/ui/ShopAddressFields';
 import { Tag } from '@/components/ui/Tag';
 import {
   ADMIN_ACCESS_PIN,
   APPLICATION_STATUS_LABELS,
   BENGAL_REGIONS,
   DISCIPLINE_TYPES,
+  disciplineToType,
+  type CreatorDiscipline,
 } from '@/constants/creator-onboarding';
+import {
+  buildShopAddress,
+  EMPTY_SHOP_ADDRESS,
+  formatShopAddress,
+  isShopAddressComplete,
+} from '@/constants/shop-address';
 import { useAsync } from '@/hooks/useAsync';
 import {
   createScoutedCreator,
@@ -29,6 +39,7 @@ import type {
   CreatorApplication,
   CreatorApplicationStatus,
   DisciplineType,
+  ShopAddress,
 } from '@/types';
 import { brand } from '@/theme';
 
@@ -302,6 +313,11 @@ export default function AdminApplicationsScreen() {
                 Portfolio: {selected.portfolioUrl}
               </AppText>
             ) : null}
+            {selected.shopAddress ? (
+              <AppText variant="caption" className="mt-xs">
+                Shop: {formatShopAddress(selected.shopAddress)}
+              </AppText>
+            ) : null}
             {selected.sampleDescription ? (
               <AppText variant="caption" className="mt-xs">
                 Sample: {selected.sampleDescription}
@@ -371,22 +387,31 @@ function ScoutForm({ onCreated }: { onCreated: () => void }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [scoutedFrom, setScoutedFrom] = useState('');
-  const [discipline, setDiscipline] = useState('');
+  const [discipline, setDiscipline] = useState<CreatorDiscipline | null>(null);
   const [disciplineType, setDisciplineType] = useState<DisciplineType>('physical');
   const [region, setRegion] = useState<BengalRegion>('Kolkata');
   const [bio, setBio] = useState('');
   const [instagramUrl, setInstagramUrl] = useState('');
+  const [shopAddress, setShopAddress] = useState<ShopAddress>(EMPTY_SHOP_ADDRESS);
   const [adminNotes, setAdminNotes] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const submit = async () => {
     const trimmedName = name.trim();
     const trimmedFrom = scoutedFrom.trim();
-    const trimmedDiscipline = discipline.trim();
+    const trimmedDiscipline = discipline;
     const trimmedBio = bio.trim();
 
     if (!trimmedName || !trimmedFrom || !trimmedDiscipline || !trimmedBio) {
       showNotice('Missing fields', 'Name, scouted from, discipline, and bio are required.');
+      return;
+    }
+
+    if (disciplineType === 'physical' && !isShopAddressComplete(shopAddress)) {
+      showNotice(
+        'Shop location',
+        'Physical shops need town, state, zip code, and country.',
+      );
       return;
     }
 
@@ -401,6 +426,7 @@ function ScoutForm({ onCreated }: { onCreated: () => void }) {
         region,
         bio: trimmedBio,
         instagramUrl: instagramUrl.trim() || undefined,
+        shopAddress: buildShopAddress(disciplineType, shopAddress),
         adminNotes: adminNotes.trim() || undefined,
         status: 'in_review',
       });
@@ -443,11 +469,12 @@ function ScoutForm({ onCreated }: { onCreated: () => void }) {
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <AuthFormField
-        label="Discipline"
+      <DisciplinePicker
         value={discipline}
-        onChangeText={setDiscipline}
-        placeholder="e.g. Jamdani weaver"
+        onChange={(next) => {
+          setDiscipline(next);
+          setDisciplineType(disciplineToType(next));
+        }}
       />
       <ScrollView
         horizontal
@@ -471,6 +498,9 @@ function ScoutForm({ onCreated }: { onCreated: () => void }) {
           </Pressable>
         ))}
       </ScrollView>
+      {disciplineType === 'physical' ? (
+        <ShopAddressFields value={shopAddress} onChange={setShopAddress} />
+      ) : null}
       <AuthFormField
         label="Short bio"
         value={bio}

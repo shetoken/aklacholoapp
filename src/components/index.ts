@@ -31,6 +31,8 @@ export { PortfolioGrid } from './creators/PortfolioGrid';
 export { ArticleCard } from './articles/ArticleCard';
 export { ArticleTile } from './articles/ArticleTile';
 export { ArticleBody } from './articles/ArticleBody';
+export { SareeCard } from './sarees/SareeCard';
+export { SareeBody } from './sarees/SareeBody';
 export { ExperienceTile } from './experiences/ExperienceTile';
 export { ExperienceGridCell } from './experiences/ExperienceGridCell';
 export { TopicTile } from './discover/TopicTile';

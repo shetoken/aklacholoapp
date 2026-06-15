@@ -7,6 +7,14 @@
  * grounded-chat traverse the content graph.
  */
 
+import type {
+  CreatorCategoryId,
+  CreatorService,
+  SpecialtyTagId,
+} from '@/data/creator-taxonomy';
+
+export type { CreatorCategoryId, CreatorService, SpecialtyTagId };
+
 export type ID = string;
 
 export type BengalRegion =
@@ -42,17 +50,23 @@ export type DisciplineType = 'physical' | 'digital' | 'teacher';
 export interface Creator {
   id: ID;
   name: string;
-  /** Flexible free-text, e.g. "Kantha artisan", "3D motion designer". */
+  /** Short card headline, e.g. "Kantha embroiderer". */
   discipline: string;
-  /** Coarse bucket for filtering. */
-  disciplineType: DisciplineType;
-  region: BengalRegion;
+  /** Top-level taxonomy buckets — one or more. */
+  categories: CreatorCategoryId[];
+  /** Defined specialty tags; each must belong to one of `categories`. */
+  specialtyTags: SpecialtyTagId[];
+  /** What they offer: commissions, teaching, performance, shop products. */
+  services: CreatorService[];
+  region: BengalRegion | string;
   avatar: ImageRef;
-  bio: string; // short, card-sized
-  story?: string; // long-form profile narrative
+  bio: string;
+  story?: string;
   portfolio: ImageRef[];
   productIds: ID[];
   socials?: { label: string; url: string }[];
+  /** @deprecated — use `categories` + `services` for filtering. */
+  disciplineType?: DisciplineType;
 }
 
 // ----------------------------------------------------------------------------
@@ -72,6 +86,16 @@ export type CreatorApplicationStatus =
 /** `application` = self-serve form; `scouted` = founder-added (e.g. Instagram). */
 export type CreatorSource = 'application' | 'scouted';
 
+/** Shop / studio location when disciplineType is physical. */
+export type ShopCountry = 'India' | 'Bangladesh';
+
+export interface ShopAddress {
+  town: string;
+  state: string;
+  zipCode: string;
+  country: ShopCountry;
+}
+
 export interface CreatorApplicationInput {
   name: string;
   email: string;
@@ -85,6 +109,7 @@ export interface CreatorApplicationInput {
   portfolioUrl?: string;
   /** What they could send for a vetting sample order. */
   sampleDescription?: string;
+  shopAddress?: ShopAddress;
 }
 
 export interface CreatorApplication extends CreatorApplicationInput {
@@ -107,6 +132,79 @@ export interface ScoutedCreatorInput extends CreatorApplicationInput {
     CreatorApplicationStatus,
     'in_review' | 'approved' | 'sample_requested'
   >;
+}
+
+// ----------------------------------------------------------------------------
+// Bengali Sarees — encyclopedia hub inside Discover (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type SareeAxis = 'type' | 'style' | 'drape';
+
+export type SareeFabric =
+  | 'cotton'
+  | 'muslin'
+  | 'silk'
+  | 'tussar-silk'
+  | 'matka-silk'
+  | 'mixed'
+  | 'n-a';
+
+/** Pan-Bengal origins — distinct from creator `BengalRegion`. */
+export type SareeRegion =
+  | 'dhaka-bangladesh'
+  | 'murshidabad-wb'
+  | 'bishnupur-wb'
+  | 'shantipur-phulia-wb'
+  | 'tangail'
+  | 'nadia-wb'
+  | 'birbhum-wb'
+  | 'across-bengal';
+
+export type SareeHeritageTag =
+  | 'unesco-intangible-heritage'
+  | 'gi-protected'
+  | 'ceremonial'
+  | 'everyday';
+
+/** Subset of creator taxonomy `SpecialtyTagId` for saree ↔ maker links. */
+export type SareeCreatorTag = Extract<
+  SpecialtyTagId,
+  | 'jamdani'
+  | 'tant'
+  | 'baluchari'
+  | 'kantha'
+  | 'block-print-dye'
+  | 'saree-artisan'
+>;
+
+export interface SareeBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+export interface Saree {
+  id: ID;
+  slug: string;
+  axis: SareeAxis;
+  name: string;
+  nameBengali?: string;
+  nameRomanized?: string;
+  subtitle: string;
+  fabric: SareeFabric;
+  regions: SareeRegion[];
+  heritage: SareeHeritageTag[];
+  motifs?: string[];
+  occasions?: string[];
+  shortDescription: string;
+  bodySections: SareeBodySection[];
+  relatedCreatorTags: SareeCreatorTag[];
+  relatedShopProductIds: ID[];
+  relatedArticleIds: ID[];
+  relatedSareeIds: ID[];
+  heroImage: ImageRef;
+  gallery?: ImageRef[];
+  isFlagship: boolean;
+  isStub: boolean;
 }
 
 // ----------------------------------------------------------------------------

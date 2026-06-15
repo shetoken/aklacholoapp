@@ -151,6 +151,28 @@ export default function ExploreScreen() {
             renderItem={(a) => <ArticleTile article={a} size={TILE} />}
           />
 
+          <Link href="/sarees" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-lg border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Bengali Sarees</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Weaves, styles, and drapes — jamdani, tant, laal-paar shada, athpoure, and more.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore sarees
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
           <KolkaDivider />
 
           <SectionHeader

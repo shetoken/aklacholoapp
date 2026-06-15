@@ -4,16 +4,21 @@ import type {
   DisciplineType,
 } from '@/types';
 
+/** Regions on creator apply / scout forms — West Bengal (India) for now. */
 export const BENGAL_REGIONS: BengalRegion[] = [
-  'Dhaka',
   'Kolkata',
   'Bishnupur',
   'Shantiniketan',
   'Murshidabad',
-  'Sylhet',
-  'Tangail',
   'Nadia',
   'Other',
+];
+
+/** Bangladesh — re-enable on forms when ready (after Indian regions). */
+export const BENGAL_REGIONS_BANGLADESH: BengalRegion[] = [
+  'Dhaka',
+  'Sylhet',
+  'Tangail',
 ];
 
 export const DISCIPLINE_TYPES: { key: DisciplineType; label: string }[] = [
@@ -21,6 +26,29 @@ export const DISCIPLINE_TYPES: { key: DisciplineType; label: string }[] = [
   { key: 'digital', label: 'Digital / animation / design' },
   { key: 'teacher', label: 'Teacher / classes' },
 ];
+
+export const CREATOR_DISCIPLINES = [
+  'Kolka Art',
+  'Batik Art',
+  'Textiles',
+  'Embroidery',
+  'Artist - Paintings',
+  'Graphic Designer',
+  'AI Animator',
+] as const;
+
+export type CreatorDiscipline = (typeof CREATOR_DISCIPLINES)[number];
+
+/** Suggested disciplineType when a fixed discipline is chosen. */
+export function disciplineToType(d: CreatorDiscipline): DisciplineType {
+  switch (d) {
+    case 'Graphic Designer':
+    case 'AI Animator':
+      return 'digital';
+    default:
+      return 'physical';
+  }
+}
 
 export const APPLICATION_STATUS_LABELS: Record<CreatorApplicationStatus, string> =
   {

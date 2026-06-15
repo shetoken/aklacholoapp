@@ -8,6 +8,7 @@ export * from './products.service';
 export * from './creators.service';
 export * from './motifs.service';
 export * from './articles.service';
+export * from './sarees.service';
 export * from './experiences.service';
 export * from './discover.service';
 export * from './journey.service';

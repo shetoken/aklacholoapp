@@ -2,7 +2,31 @@
 export { collections } from './collections';
 export { products } from './products';
 export { creators } from './creators';
+export {
+  CREATOR_TAXONOMY,
+  CREATOR_SERVICES,
+  CREATOR_SERVICE_META,
+  allCategories,
+  allCategoryIds,
+  allSpecialtyTags,
+  categoryForTag,
+  getCategoryDescription,
+  getCategoryLabel,
+  getServiceDescription,
+  getServiceLabel,
+  getTagDescription,
+  getTagLabel,
+  getTagMeta,
+  isTagAllowedForCategories,
+  tagsForCategory,
+} from './creator-taxonomy';
+export type {
+  CreatorCategoryId,
+  CreatorService,
+  SpecialtyTagId,
+} from './creator-taxonomy';
 export { motifs, palettes } from './motifs';
+export { sarees } from './sarees';
 export { articles } from './articles';
 export { experiences } from './experiences';
 export { discoverRails } from './discover-rails';

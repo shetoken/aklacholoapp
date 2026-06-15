@@ -140,6 +140,14 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: 'Creator pipeline' }}
               />
               <Stack.Screen
+                name="sarees/index"
+                options={{ headerShown: true, title: 'Bengali Sarees' }}
+              />
+              <Stack.Screen
+                name="sarees/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
                 name="preferences-onboarding"
                 options={{ headerShown: true, title: 'Your preferences' }}
               />

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Pressable, View } from 'react-native';
-import { Link } from 'expo-router';
+import { Link, useRouter } from 'expo-router';
 
 import { AppText } from '@/components/ui/Text';
 import { KolkaDivider } from '@/components/brand/KolkaDivider';
 import { ChevronRight } from '@/components/ui/icons';
 import { LEGAL } from '@/content/legal';
 import { brand } from '@/theme';
+
+const FOUNDER_TAP_COUNT = 5;
+const FOUNDER_TAP_WINDOW_MS = 2500;
 
 type FooterLinkProps = {
   label: string;
@@ -42,6 +45,24 @@ function FooterLink({ label, href, onPress }: FooterLinkProps) {
 
 /** Quiet legal + company links for the Account screen. */
 export function AccountLegalFooter() {
+  const router = useRouter();
+  const founderTaps = useRef(0);
+  const founderTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const onCopyrightPress = () => {
+    founderTaps.current += 1;
+    if (founderTimer.current) clearTimeout(founderTimer.current);
+    founderTimer.current = setTimeout(() => {
+      founderTaps.current = 0;
+    }, FOUNDER_TAP_WINDOW_MS);
+
+    if (founderTaps.current >= FOUNDER_TAP_COUNT) {
+      founderTaps.current = 0;
+      if (founderTimer.current) clearTimeout(founderTimer.current);
+      router.push('/admin-applications');
+    }
+  };
+
   return (
     <View className="px-xl mt-xl">
       <KolkaDivider width={120} />
@@ -49,12 +70,14 @@ export function AccountLegalFooter() {
       <FooterLink label="Contact us" href="/contact" />
       <FooterLink label="Privacy Policy" href="/privacy" />
       <FooterLink label="Terms of Use" href="/terms" />
-      <AppText
-        variant="caption"
-        className="mt-lg text-center text-brand-ivory-soft"
-      >
-        © {LEGAL.copyrightYear} {LEGAL.company}
-      </AppText>
+      <Pressable onPress={onCopyrightPress} accessibilityLabel="Copyright">
+        <AppText
+          variant="caption"
+          className="mt-lg text-center text-brand-ivory-soft"
+        >
+          © {LEGAL.copyrightYear} {LEGAL.company}
+        </AppText>
+      </Pressable>
     </View>
   );
 }
