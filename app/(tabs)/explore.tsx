@@ -173,6 +173,94 @@ export default function ExploreScreen() {
             </Pressable>
           </Link>
 
+          <Link href="/authors" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Voices of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Poets, novelists, and reformers — from Tagore and Nazrul to the diaspora.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore authors
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/tagore" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">World of Tagore</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Rabindra Sangeet parjaay, Gitabitan, novels, dance-dramas, and Shantiniketan.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore Tagore
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/palaces" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Palaces & Rajbaris</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Heritage hotels, museums, ruins, and film locations — from Murshidabad to Kolkata.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore palaces
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/festivals" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Festivals & Faiths</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Durga Puja, Eid, Christmas, Poila Boishakh — and Bengal’s sacred sites.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore festivals
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
           <KolkaDivider />
 
           <SectionHeader

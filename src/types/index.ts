@@ -208,6 +208,324 @@ export interface Saree {
 }
 
 // ----------------------------------------------------------------------------
+// Voices of Bengal — literary hub inside Discover (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type LiteraryEra =
+  | 'renaissance'
+  | 'early-modern'
+  | 'modern'
+  | 'contemporary';
+
+export type AuthorForm =
+  | 'poet'
+  | 'novelist'
+  | 'short-story'
+  | 'playwright'
+  | 'essayist'
+  | 'reformer'
+  | 'childrens'
+  | 'songwriter';
+
+/** Pan-Bengal literary geography — distinct from creator `BengalRegion`. */
+export type AuthorRegion =
+  | 'kolkata-wb'
+  | 'west-bengal'
+  | 'bangladesh'
+  | 'undivided-bengal'
+  | 'diaspora';
+
+export type AuthorRecognition =
+  | 'nobel-literature'
+  | 'jnanpith'
+  | 'sahitya-akademi'
+  | 'padma-vibhushan'
+  | 'padma-bhushan'
+  | 'padma-shri'
+  | 'national-poet';
+
+/** Maps to Words & Story specialty tags via the authors service. */
+export type AuthorCreatorTag =
+  | 'writing'
+  | 'poetry'
+  | 'storytelling'
+  | 'translation';
+
+export interface AuthorBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+export interface Author {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  lifespan?: string;
+  era: LiteraryEra;
+  forms: AuthorForm[];
+  regions: AuthorRegion[];
+  recognitions: AuthorRecognition[];
+  subtitle: string;
+  shortDescription: string;
+  bodySections: AuthorBodySection[];
+  notableWorks: string[];
+  relatedAuthorIds: ID[];
+  relatedArticleIds: ID[];
+  relatedCreatorTags: AuthorCreatorTag[];
+  relatedSareeIds?: ID[];
+  portraitImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// World of Tagore — Rabindra Sangeet & creations hub (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type Parjaay =
+  | 'puja'
+  | 'prem'
+  | 'prakriti'
+  | 'swadesh'
+  | 'anushthanik'
+  | 'bichitro'
+  | 'nrityonatya';
+
+export interface ParjaayInfo {
+  id: Parjaay;
+  name: string;
+  nameBengali: string;
+  meaning: string;
+  approxSongCount?: number;
+  subClassCount?: number;
+  description: string;
+  exampleSongs: string[];
+}
+
+export type TagoreWorkForm =
+  | 'poetry'
+  | 'novel'
+  | 'short-story'
+  | 'play'
+  | 'dance-drama'
+  | 'essay'
+  | 'song-collection'
+  | 'painting'
+  | 'institution';
+
+export interface TagoreWork {
+  id: ID;
+  slug: string;
+  form: TagoreWorkForm;
+  title: string;
+  titleBengali?: string;
+  year?: string;
+  subtitle: string;
+  description: string;
+  significance?: string;
+  relatedParjaay?: Parjaay[];
+  relatedArticleIds: ID[];
+  isFlagship: boolean;
+  isStub: boolean;
+  image: ImageRef;
+}
+
+export interface TagoreOverview {
+  name: string;
+  nameBengali: string;
+  epithet: string;
+  lifespan: string;
+  oneLine: string;
+  songCount: number;
+  authorId: ID;
+}
+
+// ----------------------------------------------------------------------------
+// Palaces & Rajbaris — heritage buildings hub (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type HeritageBuildingType =
+  | 'royal-palace'
+  | 'rajbari'
+  | 'merchant-house'
+  | 'nawabi-palace';
+
+export type HeritageCurrentStatus =
+  | 'museum'
+  | 'heritage-hotel'
+  | 'ruin-abandoned'
+  | 'private-residence'
+  | 'for-sale'
+  | 'partial-public'
+  | 'film-location';
+
+export type HeritageArchitecturalStyle =
+  | 'indo-saracenic'
+  | 'italian-renaissance'
+  | 'greek-doric'
+  | 'neoclassical'
+  | 'colonial'
+  | 'bengali-traditional'
+  | 'terracotta'
+  | 'mixed';
+
+/** Pan-Bengal geography for heritage sites — distinct from creator `BengalRegion`. */
+export type HeritageBuildingRegion =
+  | 'murshidabad'
+  | 'hooghly'
+  | 'south-24-parganas'
+  | 'north-24-parganas'
+  | 'cooch-behar'
+  | 'bankura'
+  | 'purulia'
+  | 'kolkata'
+  | 'east-medinipur'
+  | 'west-bengal-other'
+  | 'bangladesh';
+
+export interface HeritageBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+export interface HeritageBuilding {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  type: HeritageBuildingType;
+  currentStatus: HeritageCurrentStatus[];
+  style: HeritageArchitecturalStyle[];
+  region: HeritageBuildingRegion;
+  location: string;
+  builtPeriod: string;
+  builtBy?: string;
+  dynastyOrFamily?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: HeritageBodySection[];
+  historicalSignificance: string;
+  visitorNote?: string;
+  notableFor?: string[];
+  relatedBuildingIds: ID[];
+  relatedArticleIds: ID[];
+  relatedSareeIds?: ID[];
+  heroImage: ImageRef;
+  gallery?: ImageRef[];
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Festivals & Faiths — calendar and sacred sites hub (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type FaithTradition =
+  | 'hindu'
+  | 'islam'
+  | 'christian'
+  | 'buddhist'
+  | 'jain'
+  | 'sikh'
+  | 'interfaith'
+  | 'secular';
+
+export type FestivalSeason = 'spring' | 'summer' | 'monsoon' | 'autumn' | 'winter';
+
+/** Pan-Bengal geography for festivals & sites — distinct from other region enums. */
+export type FaithRegion =
+  | 'kolkata'
+  | 'howrah'
+  | 'hooghly'
+  | 'north-24-parganas'
+  | 'south-24-parganas'
+  | 'murshidabad'
+  | 'bankura'
+  | 'birbhum'
+  | 'malda'
+  | 'darjeeling'
+  | 'west-bengal-other'
+  | 'bangladesh'
+  | 'across-bengal';
+
+export interface FestivalBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+/** Subset of creator taxonomy tags for festival ↔ maker links. */
+export type FestivalCreatorTag = Extract<SpecialtyTagId, 'dhaki' | 'terracotta'>;
+
+export interface Festival {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  faith: FaithTradition;
+  season: FestivalSeason;
+  timeOfYear: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FestivalBodySection[];
+  heritageNote?: string;
+  relatedSiteIds: ID[];
+  relatedArticleIds: ID[];
+  relatedCreatorTags?: FestivalCreatorTag[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export type ReligiousSiteType =
+  | 'temple'
+  | 'mosque'
+  | 'church'
+  | 'monastery'
+  | 'gurudwara'
+  | 'jain-temple'
+  | 'shrine';
+
+export type ReligiousSiteStatus =
+  | 'active-worship'
+  | 'heritage-monument'
+  | 'pilgrimage'
+  | 'unesco-listed';
+
+export interface SiteBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+export interface ReligiousSite {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  faith: FaithTradition;
+  type: ReligiousSiteType;
+  status: ReligiousSiteStatus[];
+  region: FaithRegion;
+  location: string;
+  builtPeriod?: string;
+  builtBy?: string;
+  architecturalStyle?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: SiteBodySection[];
+  historicalSignificance: string;
+  visitorNote?: string;
+  relatedSiteIds: ID[];
+  relatedFestivalIds: ID[];
+  relatedArticleIds: ID[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
 // Product / Design
 // ----------------------------------------------------------------------------
 export interface Product {

@@ -27,6 +27,10 @@ export type {
 } from './creator-taxonomy';
 export { motifs, palettes } from './motifs';
 export { sarees } from './sarees';
+export { authors } from './authors';
+export { tagoreOverview, tagoreWorks, parjaays } from './tagore';
+export { heritageBuildings } from './heritage-buildings';
+export { festivals, religiousSites } from './festivals-faith';
 export { articles } from './articles';
 export { experiences } from './experiences';
 export { discoverRails } from './discover-rails';

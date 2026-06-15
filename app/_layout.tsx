@@ -148,6 +148,46 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: '' }}
               />
               <Stack.Screen
+                name="authors/index"
+                options={{ headerShown: true, title: 'Voices of Bengal' }}
+              />
+              <Stack.Screen
+                name="authors/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="tagore/index"
+                options={{ headerShown: true, title: 'World of Tagore' }}
+              />
+              <Stack.Screen
+                name="tagore/parjaay/[id]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="tagore/work/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="palaces/index"
+                options={{ headerShown: true, title: 'Palaces & Rajbaris' }}
+              />
+              <Stack.Screen
+                name="palaces/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="festivals/index"
+                options={{ headerShown: true, title: 'Festivals & Faiths' }}
+              />
+              <Stack.Screen
+                name="festivals/festival/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="festivals/site/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
                 name="preferences-onboarding"
                 options={{ headerShown: true, title: 'Your preferences' }}
               />

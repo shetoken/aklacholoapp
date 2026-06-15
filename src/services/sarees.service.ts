@@ -19,6 +19,13 @@ export async function getSareeBySlug(slug: string): Promise<Saree> {
   return mockResponse(found);
 }
 
+export function getSareesByIds(ids: string[]): Promise<Saree[]> {
+  const ordered = ids
+    .map((id) => sarees.find((s) => s.id === id))
+    .filter((s): s is Saree => Boolean(s));
+  return mockResponse(ordered);
+}
+
 export function getSareesByAxis(axis: SareeAxis): Promise<Saree[]> {
   return mockResponse(sarees.filter((s) => s.axis === axis));
 }
