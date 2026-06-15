@@ -23,6 +23,7 @@ import {
   getTagoreOverview,
   getWorksByForm,
 } from '@/services';
+import type { TagoreWork, TagoreWorkForm } from '@/types';
 import { brand } from '@/theme';
 
 export default function WorldOfTagoreHubScreen() {
@@ -38,7 +39,7 @@ export default function WorldOfTagoreHubScreen() {
   const paintings = useAsync(() => getWorksByForm('painting'), []);
   const shantiniketan = useAsync(() => getWorksByForm('institution'), []);
 
-  const worksByForm = {
+  const worksByForm: Partial<Record<TagoreWorkForm, TagoreWork[]>> = {
     poetry: poetry.data ?? [],
     novel: novels.data ?? [],
     play: plays.data ?? [],
@@ -161,7 +162,7 @@ export default function WorldOfTagoreHubScreen() {
         </ScrollView>
 
         {TAGORE_HUB_CREATION_FORMS.map((form) => {
-          const items = worksByForm[form];
+          const items = worksByForm[form] ?? [];
           if (items.length === 0) return null;
 
           return (

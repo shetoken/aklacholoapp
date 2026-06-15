@@ -195,6 +195,292 @@ export default function ExploreScreen() {
             </Pressable>
           </Link>
 
+          <Link href="/icons" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-marigold mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Icons of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Ray, Ravi Shankar, J. C. Bose, Amartya Sen — genius across film, music, science, and more.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-marigold mr-xs">
+                      Explore icons
+                    </AppText>
+                    <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/natural-bengal" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Natural Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Sundarbans, the Ganga, Darjeeling tea, jute, and the delta from hills to sea.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore nature
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/music" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Sur o Sangeet
+                  </AppText>
+                  <AppText variant="h2">Music of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Rabindra Sangeet, Nazrul Geeti, Baul, Shyama Sangeet — and the instruments that carry them.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore music
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/bagan" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Bagan</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Fruits, vegetables, and flowers — seasonal produce and festival blooms from mango to kash phul.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore the garden
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/pakhi" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia
+                  </AppText>
+                  <AppText variant="h2">Pakhi</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Birds of Bengal — doyel, machhranga, Sundarbans rarities, and winter migrants.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore birds
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/maachhe-bhaate" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Maachhe Bhaate
+                  </AppText>
+                  <AppText variant="h2">Fish & Dal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Ilish in monsoon mustard, pond rui in light jhol, and the dals that anchor every Bengali meal.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore the table
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/rannaghar" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Rannaghar
+                  </AppText>
+                  <AppText variant="h2">The Kitchen of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Luchi, shorshe ilish, phuchka, rosogolla — recipes and street food browsable by meal, diet, and allergen.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore the kitchen
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/hastoshilpo" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Hastoshilpo
+                  </AppText>
+                  <AppText variant="h2">Arts & Crafts of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Kantha, dokra, patachitra, terracotta — living traditions and the makers who carry them forward.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore crafts
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/saaj-o-poshak" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Saaj o Poshak
+                  </AppText>
+                  <AppText variant="h2">Attire & Adornment</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Dhuti-panjabi, bridal saree, gold jewellery, shakha-pola and sindoor — dress and tradition with dignity.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore attire
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/boi" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Boi
+                  </AppText>
+                  <AppText variant="h2">Landmark Books</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Pather Panchali, Gitanjali, Gora — Bengali letters that crossed into world cinema.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore books
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/cholochitro" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Cholochitro
+                  </AppText>
+                  <AppText variant="h2">Cinema of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Pather Panchali, the Apu Trilogy, Meghe Dhaka Tara — Tollywood and the films that changed world cinema.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore cinema
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/bangabda" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Bangabda
+                  </AppText>
+                  <AppText variant="h2">The Bengali Year</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Six seasons, twelve months — Poila Boishakh, Durga Puja, pithe season, and the rituals that mark a Bengali life.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore the calendar
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/bhraman" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Encyclopedia · Bhraman
+                  </AppText>
+                  <AppText variant="h2">Explore Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Victoria Memorial, Park Street, Darjeeling, the Sundarbans — where to go, why it matters, and how to get there.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Explore places
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
           <Link href="/tagore" asChild>
             <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
               <View style={{ backgroundColor: brand.surface }}>
@@ -255,6 +541,28 @@ export default function ExploreScreen() {
                       Explore festivals
                     </AppText>
                     <ChevronRight color={brand.marigold} />
+                  </View>
+                </View>
+              </View>
+            </Pressable>
+          </Link>
+
+          <Link href="/memorial" asChild>
+            <Pressable className="mx-xl rounded-2xl overflow-hidden mt-md border border-brand-border">
+              <View style={{ backgroundColor: brand.surface }}>
+                <View className="p-xl">
+                  <AppText variant="label" className="text-brand-kolka mb-xs">
+                    Memorial
+                  </AppText>
+                  <AppText variant="h2">Sons & Daughters of Bengal</AppText>
+                  <AppText variant="body" className="mt-xs text-brand-ivory-soft" style={{ lineHeight: 24 }}>
+                    Freedom fighters from both Bengals — and the Cellular Jail at Kala Pani.
+                  </AppText>
+                  <View className="flex-row items-center mt-md">
+                    <AppText variant="label" className="text-brand-kolka mr-xs">
+                      Enter memorial
+                    </AppText>
+                    <ChevronRight color={brand.kolka} />
                   </View>
                 </View>
               </View>

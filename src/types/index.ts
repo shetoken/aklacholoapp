@@ -526,6 +526,906 @@ export interface ReligiousSite {
 }
 
 // ----------------------------------------------------------------------------
+// Sons & Daughters of Bengal — freedom fighters memorial (Magic of Bengal)
+// ----------------------------------------------------------------------------
+export type FighterGender = 'male' | 'female';
+
+export type StruggleRole =
+  | 'armed-revolutionary'
+  | 'political-leader'
+  | 'mass-mobiliser'
+  | 'ideologue-thinker'
+  | 'ina-azad-hind'
+  | 'women-revolutionary';
+
+export type FighterFate =
+  | 'executed'
+  | 'killed-in-action'
+  | 'died-in-prison'
+  | 'died-in-exile'
+  | 'self-sacrifice'
+  | 'survived'
+  | 'disappeared'
+  | 'fate-unverified';
+
+export type BorderSide =
+  | 'west-bengal-india'
+  | 'bangladesh'
+  | 'undivided-bengal';
+
+export type StruggleMovement =
+  | 'anushilan-jugantar'
+  | 'chittagong-uprising'
+  | 'swadeshi'
+  | 'ina-azad-hind'
+  | 'quit-india'
+  | 'congress'
+  | 'other';
+
+export interface FighterBodySection {
+  id: ID;
+  heading: string;
+  body: string;
+}
+
+export interface FreedomFighter {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  gender: FighterGender;
+  lifespan?: string;
+  ageAtDeath?: number;
+  borderSide: BorderSide;
+  birthplace?: string;
+  roles: StruggleRole[];
+  movements: StruggleMovement[];
+  fate: FighterFate;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FighterBodySection[];
+  martyrdom?: string;
+  notableFor: string[];
+  relatedFighterIds: ID[];
+  relatedArticleIds: ID[];
+  portraitImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export interface VerifiedCellularJailMartyr {
+  name: string;
+  gender?: FighterGender;
+  ageAtDeath?: number;
+  shortBio?: string;
+  circumstancesOfDeath?: string;
+  source: string;
+}
+
+export interface CellularJailOverview {
+  title: string;
+  titleBengali: string;
+  location: string;
+  builtPeriod: string;
+  summary: string;
+  significance: string;
+  dataIntegrityNote: string;
+  authoritativeSources: string[];
+  verifiedMartyrs: VerifiedCellularJailMartyr[];
+}
+
+export interface CellularJailNote {
+  headline: string;
+  body: string;
+  sources: string[];
+}
+
+/** Documented Cellular Jail prisoners — separate register from FreedomFighter profiles. */
+export type CellularJailPrisonerFate =
+  | 'died-in-jail'
+  | 'released'
+  | 'survived-released'
+  | 'broke-mentally'
+  | 'unknown';
+
+export interface CellularJailPrisoner {
+  id: ID;
+  name: string;
+  nameBengali?: string;
+  gender: FighterGender;
+  lifespan?: string;
+  origin: string;
+  borderSide: BorderSide;
+  movements: StruggleMovement[];
+  case?: string;
+  yearDeported?: string;
+  fate: CellularJailPrisonerFate;
+  circumstances: string;
+  source: string;
+}
+
+/** Unified memorial hub tile — fighter profile or Kala Pani register entry. */
+export type MemorialTile =
+  | { kind: 'fighter'; key: string; fighter: FreedomFighter }
+  | { kind: 'prisoner'; key: string; prisoner: CellularJailPrisoner };
+
+// ----------------------------------------------------------------------------
+// Icons of Bengal — notable Bengalis across film, music, science, etc.
+// (Writers live in authors.ts; revolutionaries in freedom-fighters.ts.)
+// ----------------------------------------------------------------------------
+export type IconField =
+  | 'film'
+  | 'music'
+  | 'science'
+  | 'economics'
+  | 'visual-art'
+  | 'thought-reform'
+  | 'stage-screen';
+
+export type IconBorderSide =
+  | 'west-bengal-india'
+  | 'bangladesh'
+  | 'undivided-bengal'
+  | 'diaspora';
+
+export interface IconBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Icon {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  gender: FighterGender;
+  lifespan?: string;
+  field: IconField;
+  secondaryFields?: IconField[];
+  borderSide: IconBorderSide;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: IconBodySection[];
+  notableWorks?: string[];
+  honours?: string[];
+  relatedIconIds: ID[];
+  relatedArticleIds: ID[];
+  relatedAuthorId?: ID;
+  portraitImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Natural Bengal — rivers, hills, wildlife, agriculture, and the delta
+// ----------------------------------------------------------------------------
+export type ResourceCategory =
+  | 'river'
+  | 'mountain-hill'
+  | 'mangrove-forest'
+  | 'wildlife'
+  | 'mineral'
+  | 'agriculture'
+  | 'beach-coast'
+  | 'wetland'
+  | 'protected-area';
+
+export type NaturalResourceRegion =
+  | 'darjeeling-hills'
+  | 'dooars-terai'
+  | 'gangetic-plain'
+  | 'sundarbans-delta'
+  | 'rarh-western'
+  | 'coastal'
+  | 'across-bengal'
+  | 'bangladesh'
+  | 'india-bangladesh-shared';
+
+export type HeritageTag =
+  | 'unesco-world-heritage'
+  | 'ramsar-wetland'
+  | 'gi-protected'
+  | 'national-park'
+  | 'tiger-reserve'
+  | 'biosphere-reserve';
+
+export interface ResourceBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface NaturalResource {
+  id: ID;
+  slug: string;
+  category: ResourceCategory;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  region: NaturalResourceRegion;
+  heritage: HeritageTag[];
+  subtitle: string;
+  shortDescription: string;
+  bodySections: ResourceBodySection[];
+  keyFacts?: string[];
+  significance?: string;
+  relatedResourceIds: ID[];
+  relatedArticleIds: ID[];
+  relatedBuildingIds?: ID[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Music of Bengal — genres, traditions, and instruments
+// ----------------------------------------------------------------------------
+export type GenreFamily =
+  | 'panchakavi'
+  | 'folk'
+  | 'devotional'
+  | 'classical-rooted'
+  | 'modern';
+
+export type MusicBorderSide =
+  | 'west-bengal-india'
+  | 'bangladesh'
+  | 'undivided-bengal'
+  | 'across-bengal';
+
+export interface GenreBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface MusicGenre {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  family: GenreFamily;
+  borderSide: MusicBorderSide;
+  songCount?: number;
+  songCountNote?: string;
+  founderOrKeyFigure?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: GenreBodySection[];
+  heritageNote?: string;
+  typicalInstruments: ID[];
+  relatedGenreIds: ID[];
+  relatedIconIds?: ID[];
+  relatedAuthorIds?: ID[];
+  relatedArticleIds: ID[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export type InstrumentType = 'string' | 'wind' | 'percussion' | 'keyboard-reed';
+
+export interface Instrument {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  type: InstrumentType;
+  subtitle: string;
+  description: string;
+  associatedGenreIds: ID[];
+  isFlagship: boolean;
+  isStub: boolean;
+  image: ImageRef;
+}
+
+// ----------------------------------------------------------------------------
+// Bagan — flora of Bengal (fruits, vegetables, flowers)
+// ----------------------------------------------------------------------------
+export type FloraCategory = 'fruit' | 'vegetable' | 'flower';
+
+export type FloraSeason =
+  | 'summer'
+  | 'monsoon'
+  | 'autumn'
+  | 'late-autumn'
+  | 'winter'
+  | 'spring'
+  | 'year-round';
+
+export type FloraBorderSide = 'west-bengal-india' | 'bangladesh' | 'across-bengal';
+
+export interface FloraBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface FloraItem {
+  id: ID;
+  slug: string;
+  category: FloraCategory;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  season: FloraSeason;
+  borderSide: FloraBorderSide;
+  hasGITag?: boolean;
+  giNote?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FloraBodySection[];
+  culturalNote?: string;
+  varieties?: string[];
+  relatedFestivalIds?: ID[];
+  relatedItemIds: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Pakhi — birds of Bengal
+// ----------------------------------------------------------------------------
+export type BirdHabitat =
+  | 'mangrove-sundarbans'
+  | 'wetland'
+  | 'river-delta'
+  | 'forest'
+  | 'himalayan-hills'
+  | 'grassland-dooars'
+  | 'urban-village'
+  | 'widespread';
+
+export type BirdResidency =
+  | 'resident'
+  | 'winter-migrant'
+  | 'summer-visitor'
+  | 'passage';
+
+export type OfficialBirdStatus =
+  | 'none'
+  | 'state-bird-west-bengal'
+  | 'national-bird-bangladesh';
+
+export type ConservationStatus =
+  | 'common'
+  | 'near-threatened'
+  | 'vulnerable'
+  | 'endangered'
+  | 'critically-endangered'
+  | 'unknown';
+
+export type BirdBorderSide = 'west-bengal-india' | 'bangladesh' | 'across-bengal';
+
+export interface BirdBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Bird {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  scientificName?: string;
+  habitats: BirdHabitat[];
+  residency: BirdResidency;
+  officialStatus: OfficialBirdStatus;
+  conservation: ConservationStatus;
+  borderSide: BirdBorderSide;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: BirdBodySection[];
+  culturalNote?: string;
+  bestSeenAt?: string[];
+  relatedBirdIds: ID[];
+  relatedResourceIds?: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Maachhe Bhaate — fish & dal of Bengal
+// ----------------------------------------------------------------------------
+export type FishWaterType =
+  | 'freshwater'
+  | 'brackish-estuarine'
+  | 'sea'
+  | 'dried';
+
+export type FishGroup =
+  | 'carp'
+  | 'catfish'
+  | 'prawn-shellfish'
+  | 'hilsa-herring'
+  | 'perch'
+  | 'featherback'
+  | 'sea-fish'
+  | 'dried-fish';
+
+export type FishSeason = 'monsoon' | 'winter' | 'summer' | 'year-round';
+
+export type FishBorderSide = 'west-bengal-india' | 'bangladesh' | 'across-bengal';
+
+export interface FoodBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Fish {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  group: FishGroup;
+  waterType: FishWaterType;
+  season: FishSeason;
+  borderSide: FishBorderSide;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FoodBodySection[];
+  signatureDishes?: string[];
+  culturalNote?: string;
+  relatedFishIds: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export interface Dal {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FoodBodySection[];
+  typicalPreparation?: string;
+  signatureDishes?: string[];
+  culturalNote?: string;
+  relatedDalIds: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Rannaghar — dishes of Bengal (capstone food hub)
+// ----------------------------------------------------------------------------
+export type MealType =
+  | 'breakfast'
+  | 'lunch'
+  | 'snack'
+  | 'dinner'
+  | 'sweet'
+  | 'drink'
+  | 'condiment';
+
+export type Diet = 'vegan' | 'vegetarian' | 'non-vegetarian';
+
+export type Allergen =
+  | 'dairy'
+  | 'tree-nuts'
+  | 'peanuts'
+  | 'mustard'
+  | 'fish'
+  | 'shellfish'
+  | 'egg'
+  | 'gluten'
+  | 'sesame'
+  | 'soy'
+  | 'coconut';
+
+export type DishKind =
+  | 'home-dish'
+  | 'street-food'
+  | 'mishti'
+  | 'drink'
+  | 'condiment';
+
+export type FoodSeason = 'monsoon' | 'winter' | 'summer' | 'year-round';
+
+export interface RecipeStep {
+  step: number;
+  text: string;
+}
+
+export interface Dish {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  kind: DishKind;
+  mealTypes: MealType[];
+  diet: Diet;
+  season: FoodSeason;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: FoodBodySection[];
+  hasRecipe: boolean;
+  ingredients?: string[];
+  steps?: RecipeStep[];
+  servesNote?: string;
+  allergens: Allergen[];
+  mayContain?: Allergen[];
+  allergenNote?: string;
+  fishIds?: ID[];
+  dalIds?: ID[];
+  floraIds?: ID[];
+  relatedDishIds: ID[];
+  relatedFestivalIds?: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export interface DishIngredientLinkIds {
+  fishIds: ID[];
+  dalIds: ID[];
+  floraIds: ID[];
+}
+
+export interface DishIngredientLinks {
+  fish: Fish[];
+  dals: Dal[];
+  flora: FloraItem[];
+}
+
+// ----------------------------------------------------------------------------
+// Hastoshilpo — arts & crafts of Bengal
+// ----------------------------------------------------------------------------
+export type CraftMedium =
+  | 'textile-embroidery'
+  | 'metal'
+  | 'painting'
+  | 'clay-terracotta'
+  | 'spongewood'
+  | 'shell'
+  | 'wood'
+  | 'fibre';
+
+export type CraftBorderSide = 'west-bengal-india' | 'bangladesh' | 'across-bengal';
+
+export type CraftCreatorTag = Extract<
+  SpecialtyTagId,
+  'kantha' | 'dokra' | 'patachitra' | 'terracotta' | 'sholapith' | 'conch-jewelry'
+>;
+
+export interface CraftBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Craft {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  medium: CraftMedium;
+  borderSide: CraftBorderSide;
+  originRegion?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: CraftBodySection[];
+  technique?: string;
+  modernUses?: string[];
+  creatorTags?: CraftCreatorTag[];
+  relatedCraftIds: ID[];
+  relatedSareeIds?: ID[];
+  relatedBuildingIds?: ID[];
+  relatedArticleIds: ID[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Saaj o Poshak — attire & adornment of Bengal
+// ----------------------------------------------------------------------------
+export type AttireCategory = 'clothing' | 'jewellery' | 'adornment';
+
+export type AttireWornBy = 'women' | 'men' | 'all' | 'bride' | 'groom';
+
+export type AttireBorderSide = 'west-bengal-india' | 'bangladesh' | 'across-bengal';
+
+export interface AttireBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface AttireItem {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  category: AttireCategory;
+  wornBy: AttireWornBy;
+  borderSide: AttireBorderSide;
+  isBridal?: boolean;
+  isMarriedSymbol?: boolean;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: AttireBodySection[];
+  materialNote?: string;
+  culturalNote?: string;
+  relatedCraftIds?: ID[];
+  relatedSareeIds?: ID[];
+  relatedItemIds: ID[];
+  relatedFestivalIds?: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Boi — landmark books of Bengal
+// ----------------------------------------------------------------------------
+export type LiteraryForm =
+  | 'novel'
+  | 'poetry'
+  | 'short-story-collection'
+  | 'play'
+  | 'essay'
+  | 'memoir'
+  | 'childrens';
+
+export type BookBorderSide =
+  | 'west-bengal-india'
+  | 'bangladesh'
+  | 'undivided-bengal'
+  | 'across-bengal';
+
+export interface BookBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Book {
+  id: ID;
+  slug: string;
+  title: string;
+  titleBengali?: string;
+  englishTitle?: string;
+  form: LiteraryForm;
+  year?: string;
+  borderSide: BookBorderSide;
+  authorId: ID;
+  authorName: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: BookBodySection[];
+  significance?: string;
+  adaptedFilmIds?: ID[];
+  relatedBookIds: ID[];
+  relatedArticleIds: ID[];
+  coverImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Cholochitro — cinema of Bengal
+// ----------------------------------------------------------------------------
+export type CinemaEntryType = 'film' | 'movement-era';
+
+export type CinemaBorderSide =
+  | 'west-bengal-india'
+  | 'bangladesh'
+  | 'undivided-bengal'
+  | 'across-bengal';
+
+export interface CinemaBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface CinemaEntry {
+  id: ID;
+  slug: string;
+  type: CinemaEntryType;
+  title: string;
+  titleBengali?: string;
+  englishTitle?: string;
+  year?: string;
+  borderSide: CinemaBorderSide;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: CinemaBodySection[];
+  directorIconId?: ID;
+  directorName?: string;
+  castIconIds?: ID[];
+  sourceBookId?: ID;
+  honours?: string[];
+  relatedCinemaIds: ID[];
+  relatedArticleIds: ID[];
+  posterImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
+// Bangabda — Bengali calendar & ritual year
+// ----------------------------------------------------------------------------
+export type RituId =
+  | 'grishmo'
+  | 'borsha'
+  | 'sharat'
+  | 'hemonto'
+  | 'sheet'
+  | 'boshonto';
+
+export interface Ritu {
+  id: RituId;
+  name: string;
+  nameBengali: string;
+  englishName: string;
+  monthIds: ID[];
+  gregorianSpan: string;
+  subtitle: string;
+  description: string;
+  floraIds?: ID[];
+  fishIds?: ID[];
+  festivalIds?: ID[];
+}
+
+export interface BengaliMonth {
+  id: ID;
+  order: number;
+  name: string;
+  nameBengali: string;
+  ritu: RituId;
+  gregorianSpan: string;
+  highlight: string;
+  festivalIds?: ID[];
+}
+
+export type RitualKind =
+  | 'seasonal-observance'
+  | 'rite-of-passage'
+  | 'family-custom'
+  | 'broto'
+  | 'daily-ritual';
+
+export type RitualFaith = 'hindu' | 'secular' | 'across-communities';
+
+export interface RitualBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Ritual {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  kind: RitualKind;
+  faith: RitualFaith;
+  timing: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: RitualBodySection[];
+  relatedMonthId?: ID;
+  relatedRituId?: RituId;
+  relatedFestivalIds?: ID[];
+  relatedArticleIds: ID[];
+  image: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+export interface CalendarOverview {
+  name: string;
+  nameBengali: string;
+  era: string;
+  newYearDay: string;
+  yearFormula: string;
+  oneLine: string;
+  note: string;
+}
+
+export type PanjikaSystem = 'surya-siddhanta' | 'bisuddha-siddhanta';
+
+export interface PanjikaEdition {
+  name: string;
+  nameBengali?: string;
+  founded?: string;
+  system: PanjikaSystem;
+  note: string;
+}
+
+export interface PanjikaBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Panjika {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali: string;
+  subtitle: string;
+  shortDescription: string;
+  fiveElements: string[];
+  bodySections: PanjikaBodySection[];
+  editions: PanjikaEdition[];
+  scopeNote: string;
+  relatedFestivalIds: ID[];
+}
+
+// ----------------------------------------------------------------------------
+// Bhraman — places & attractions
+// ----------------------------------------------------------------------------
+export type PlaceType =
+  | 'monument'
+  | 'cultural-hub'
+  | 'neighbourhood'
+  | 'market'
+  | 'religious-site'
+  | 'museum'
+  | 'park-nature'
+  | 'riverfront'
+  | 'city'
+  | 'hill-station'
+  | 'heritage-town'
+  | 'wildlife';
+
+export type PlaceRegion =
+  | 'kolkata'
+  | 'north-bengal'
+  | 'sundarbans-south'
+  | 'shantiniketan-birbhum'
+  | 'murshidabad'
+  | 'bishnupur-bankura'
+  | 'coastal'
+  | 'across-bengal';
+
+export interface PlaceBodySection {
+  heading: string;
+  body: string;
+}
+
+export interface Place {
+  id: ID;
+  slug: string;
+  name: string;
+  nameBengali?: string;
+  alsoKnownAs?: string;
+  type: PlaceType;
+  region: PlaceRegion;
+  parentCity?: string;
+  subtitle: string;
+  shortDescription: string;
+  bodySections: PlaceBodySection[];
+  whyVisit: string;
+  howToReach: string;
+  bestTime?: string;
+  suggestedDuration?: string;
+  relatedBuildingId?: ID;
+  relatedSiteId?: ID;
+  relatedResourceId?: ID;
+  relatedFestivalIds?: ID[];
+  relatedPlaceIds: ID[];
+  relatedArticleIds: ID[];
+  heroImage: ImageRef;
+  isFlagship: boolean;
+  isStub: boolean;
+}
+
+// ----------------------------------------------------------------------------
 // Product / Design
 // ----------------------------------------------------------------------------
 export interface Product {

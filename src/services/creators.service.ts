@@ -92,3 +92,5 @@ export function filterCreators(items: Creator[], query: string): Creator[] {
 export function getAllSpecialtyTags(): Promise<readonly string[]> {
   return mockResponse(allSpecialtyTags());
 }
+
+export { getTagLabel } from '@/data';

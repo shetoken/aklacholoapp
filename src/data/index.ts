@@ -31,6 +31,25 @@ export { authors } from './authors';
 export { tagoreOverview, tagoreWorks, parjaays } from './tagore';
 export { heritageBuildings } from './heritage-buildings';
 export { festivals, religiousSites } from './festivals-faith';
+export { freedomFighters } from './freedom-fighters';
+export { icons } from './icons';
+export { naturalResources } from './natural-bengal';
+export { instruments, musicGenres } from './music';
+export { floraItems } from './flora';
+export { birds } from './birds';
+export { fish, dals } from './fish-dal';
+export { dishes } from './food';
+export { crafts } from './crafts';
+export { attireItems } from './attire';
+export { books } from './books';
+export { cinemaEntries } from './cinema';
+export { ritus, months, rituals, CALENDAR_OVERVIEW, panjika } from './calendar';
+export { places } from './places';
+export {
+  cellularJailPrisoners,
+  CELLULAR_JAIL_NOTE,
+  cellularJailIntro,
+} from './cellular-jail';
 export { articles } from './articles';
 export { experiences } from './experiences';
 export { discoverRails } from './discover-rails';

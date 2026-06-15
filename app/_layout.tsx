@@ -156,6 +156,122 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: '' }}
               />
               <Stack.Screen
+                name="icons/index"
+                options={{ headerShown: true, title: 'Icons of Bengal' }}
+              />
+              <Stack.Screen
+                name="icons/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="natural-bengal/index"
+                options={{ headerShown: true, title: 'Natural Bengal' }}
+              />
+              <Stack.Screen
+                name="natural-bengal/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="music/index"
+                options={{ headerShown: true, title: 'Music of Bengal' }}
+              />
+              <Stack.Screen
+                name="music/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="bagan/index"
+                options={{ headerShown: true, title: 'Bagan' }}
+              />
+              <Stack.Screen
+                name="bagan/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="pakhi/index"
+                options={{ headerShown: true, title: 'Pakhi' }}
+              />
+              <Stack.Screen
+                name="pakhi/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="maachhe-bhaate/index"
+                options={{ headerShown: true, title: 'Maachhe Bhaate' }}
+              />
+              <Stack.Screen
+                name="maachhe-bhaate/fish/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="maachhe-bhaate/dal/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="rannaghar/index"
+                options={{ headerShown: true, title: 'Rannaghar' }}
+              />
+              <Stack.Screen
+                name="rannaghar/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="hastoshilpo/index"
+                options={{ headerShown: true, title: 'Hastoshilpo' }}
+              />
+              <Stack.Screen
+                name="hastoshilpo/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="saaj-o-poshak/index"
+                options={{ headerShown: true, title: 'Saaj o Poshak' }}
+              />
+              <Stack.Screen
+                name="saaj-o-poshak/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="boi/index"
+                options={{ headerShown: true, title: 'Boi' }}
+              />
+              <Stack.Screen
+                name="boi/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="cholochitro/index"
+                options={{ headerShown: true, title: 'Cholochitro' }}
+              />
+              <Stack.Screen
+                name="cholochitro/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="bangabda/index"
+                options={{ headerShown: true, title: 'Bangabda' }}
+              />
+              <Stack.Screen
+                name="bangabda/ritu/[id]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="bangabda/month/[id]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="bangabda/ritual/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="bhraman/index"
+                options={{ headerShown: true, title: 'Bhraman' }}
+              />
+              <Stack.Screen
+                name="bhraman/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
                 name="tagore/index"
                 options={{ headerShown: true, title: 'World of Tagore' }}
               />
@@ -185,6 +301,18 @@ export default function RootLayout() {
               />
               <Stack.Screen
                 name="festivals/site/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="memorial/index"
+                options={{ headerShown: true, title: 'Sons & Daughters of Bengal' }}
+              />
+              <Stack.Screen
+                name="memorial/[slug]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="memorial/prisoner/[id]"
                 options={{ headerShown: true, title: '' }}
               />
               <Stack.Screen
