@@ -1,6 +1,6 @@
 /** Company, support, and legal copy — update when real policies ship. */
 export const LEGAL = {
-  company: 'House of TechDivA LLC',
+  company: 'House of TechDIVA LLC',
   copyrightYear: 2026,
   contactEmail: 'hello@aklacholo.com',
 } as const;

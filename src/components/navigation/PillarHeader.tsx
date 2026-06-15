@@ -34,7 +34,7 @@ const accentColor = {
 } as const;
 
 const HOME_INTRO_COPY =
-  'AklaCholo is a home for the soul of Bengal — for those who carry her far from home, and those discovering her for the first time. Explore her unique beauty: her art, her artisans, her weavers, her food, music, and stories — all gathered onto a single thread at last.';
+  "AklaCholo is home for the soul of Bengal — for those who carry her far from home, and those discovering her for the first time. Explore her unique beauty: her art, her artisans, her weavers, her food, music, and stories — all gathered onto a single thread at last. 'Eki shutre bandha'. Come, take your place.";
 
 const MENU_ITEM_GAP = 16;
 
@@ -229,20 +229,6 @@ export function PillarHeader({
             style={{ lineHeight: 28 }}
           >
             {HOME_INTRO_COPY}
-          </AppText>
-          <AppText
-            variant="quote"
-            className={onDark ? 'mt-md text-brand-marigold font-serif-italic' : 'mt-md'}
-            style={{ fontSize: 22 }}
-          >
-            Eki shutre bandha.
-          </AppText>
-          <AppText
-            variant="body"
-            className={onDark ? 'mt-sm text-brand-ivory font-sans-semibold' : 'mt-sm'}
-            style={{ lineHeight: 28 }}
-          >
-            Come, take your place.
           </AppText>
         </View>
       ) : null}

@@ -34,7 +34,7 @@ export const PILLARS: Pillar[] = [
     label: 'Experience',
     title: 'Experience Bengal',
     subtitle:
-      "Bengal — the cultural capital of India. A land of festivals, food, warmth, and world-famous textiles; the home of Tagore, India's first Nobel laureate. Come for a grand occasion like Durga Puja, or for the everyday rhythm of chai and adda — Bengal's unhurried art of conversation. It has it all: the hills of Darjeeling, the mangrove forests of the Sundarbans, ancient crafts, and a cuisine loved across India.",
+      "Bengal — the cultural capital of India. A land of festivals, food, warmth, and world-famous textiles; the home of Tagore, India's first Nobel laureate. Come for a grand occasion like Durga Puja, or for the everyday rhythm of chai and adda — Bengal's unhurried art of conversation. It has it all: the hills of Darjeeling, the mangrove forests of the Sundarbans, ancient crafts, and a cuisine loved across the world.",
     cta: 'Browse Experience',
     href: '/experience',
     accent: 'marigold',
