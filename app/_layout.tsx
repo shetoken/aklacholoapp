@@ -13,6 +13,7 @@ import { brand, fonts } from '@/theme';
 import { WishlistProvider } from '@/context/WishlistProvider';
 import { AuthProvider } from '@/context/AuthProvider';
 import { JourneyProvider } from '@/context/JourneyProvider';
+import { PreferencesProvider } from '@/context/PreferencesProvider';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -54,6 +55,7 @@ export default function RootLayout() {
       <SafeAreaProvider>
         <WishlistProvider>
           <AuthProvider>
+          <PreferencesProvider>
           <JourneyProvider>
           <View style={{ flex: 1 }} onLayout={onReady}>
             <StatusBar style="light" />
@@ -98,6 +100,38 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: 'Account' }}
               />
               <Stack.Screen
+                name="sign-in"
+                options={{ headerShown: true, title: 'Sign in' }}
+              />
+              <Stack.Screen
+                name="sign-up"
+                options={{ headerShown: true, title: 'Create account' }}
+              />
+              <Stack.Screen
+                name="about"
+                options={{ headerShown: true, title: 'About' }}
+              />
+              <Stack.Screen
+                name="contact"
+                options={{ headerShown: true, title: 'Contact us' }}
+              />
+              <Stack.Screen
+                name="contact-sent"
+                options={{ headerShown: true, title: 'Message sent' }}
+              />
+              <Stack.Screen
+                name="privacy"
+                options={{ headerShown: true, title: 'Privacy Policy' }}
+              />
+              <Stack.Screen
+                name="terms"
+                options={{ headerShown: true, title: 'Terms of Use' }}
+              />
+              <Stack.Screen
+                name="preferences-onboarding"
+                options={{ headerShown: true, title: 'Your preferences' }}
+              />
+              <Stack.Screen
                 name="journey"
                 options={{ headerShown: true, title: 'Journey Through Bengal' }}
               />
@@ -112,6 +146,7 @@ export default function RootLayout() {
             </Stack>
           </View>
           </JourneyProvider>
+          </PreferencesProvider>
           </AuthProvider>
         </WishlistProvider>
       </SafeAreaProvider>

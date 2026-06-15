@@ -15,6 +15,7 @@ import {
   ErrorView,
   EmptyState,
 } from '@/components';
+import { AccountLegalFooter } from '@/components/navigation/AccountLegalFooter';
 import { ChevronRight } from '@/components/ui/icons';
 import { useAsync } from '@/hooks/useAsync';
 import { useAuth } from '@/context/AuthProvider';
@@ -32,7 +33,7 @@ function estimate(product: Product): number {
 }
 
 export default function AccountScreen() {
-  const { user, isGuest, signIn, signOut } = useAuth();
+  const { user, isGuest, signOut } = useAuth();
   const { items, ready } = useWishlist();
   const products = useAsync(() => getProducts(), []);
   const collections = useAsync(() => getCollections(), []);
@@ -75,15 +76,23 @@ export default function AccountScreen() {
                 Sign in to sync saved pieces, book classes, and hire creators.
                 You can browse everything as a guest.
               </AppText>
-              <Pressable
-                onPress={signIn}
-                className="mt-lg rounded-xl py-md items-center"
-                style={{ backgroundColor: brand.marigold }}
-              >
-                <AppText variant="label" style={{ color: brand.ink }}>
-                  Sign in
-                </AppText>
-              </Pressable>
+              <Link href="/sign-in" asChild>
+                <Pressable
+                  className="mt-lg rounded-xl py-md items-center"
+                  style={{ backgroundColor: brand.marigold }}
+                >
+                  <AppText variant="label" style={{ color: brand.ink }}>
+                    Sign in
+                  </AppText>
+                </Pressable>
+              </Link>
+              <Link href="/sign-up" asChild>
+                <Pressable className="mt-md py-md items-center rounded-xl border border-brand-border">
+                  <AppText variant="label" className="text-brand-ivory">
+                    Create account
+                  </AppText>
+                </Pressable>
+              </Link>
               <AppText variant="caption" className="mt-sm text-center">
                 Phase 1 stub — Apple & Google auth in Phase 2
               </AppText>
@@ -192,6 +201,8 @@ export default function AccountScreen() {
             ) : null}
           </>
         )}
+
+        <AccountLegalFooter />
       </Screen>
     </>
   );

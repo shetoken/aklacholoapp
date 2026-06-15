@@ -3,6 +3,8 @@ import { Pressable, View } from 'react-native';
 import { Link, useRouter } from 'expo-router';
 
 import { AppText } from '@/components/ui/Text';
+import { BrandName } from '@/components/brand/BrandName';
+import { HomeIcon } from '@/components/ui/icons';
 import { APP } from '@/constants/app';
 import {
   PILLARS,
@@ -34,6 +36,19 @@ const accentColor = {
 const HOME_INTRO_COPY =
   'AklaCholo is a home for the soul of Bengal — for those who carry her far from home, and those discovering her for the first time. Explore her unique beauty: her art, her artisans, her weavers, her food, music, and stories — all gathered onto a single thread at last.';
 
+const MENU_ITEM_GAP = 16;
+
+function menuItemStyle(selected: boolean) {
+  return {
+    paddingTop: 6,
+    paddingBottom: 8,
+    paddingHorizontal: 2,
+    backgroundColor: 'transparent' as const,
+    borderBottomWidth: selected ? 2 : 0,
+    borderBottomColor: selected ? brand.marigold : 'transparent',
+  };
+}
+
 function PillarSwitcher({
   active,
   tone,
@@ -45,43 +60,57 @@ function PillarSwitcher({
   const onDark = tone === 'dark';
 
   return (
-    <View className="flex-row px-xl pt-lg pb-md gap-sm">
+    <View className="flex-row px-xl pt-sm pb-0 items-end">
+      <Pressable
+        onPress={() => router.push('/(tabs)')}
+        accessibilityLabel="Home"
+        className="items-center shrink-0"
+        style={menuItemStyle(active === 'home')}
+      >
+        <HomeIcon
+          color={
+            active === 'home'
+              ? brand.marigold
+              : onDark
+                ? brand['ivory-soft']
+                : colors.text?.muted ?? '#8A7E72'
+          }
+          filled={active === 'home'}
+          size={20}
+        />
+      </Pressable>
+
       {PILLARS.map((pillar) => {
         const isActive = active === pillar.id;
-        const accent = accentColor[pillar.accent];
 
         return (
           <Pressable
             key={pillar.id}
             onPress={() => router.push(pillar.href)}
-            className="flex-1 items-center py-sm rounded-lg"
+            className="items-center shrink"
             style={{
-              backgroundColor: isActive
-                ? onDark
-                  ? `${accent}22`
-                  : `${accent}18`
-                : 'transparent',
-              borderBottomWidth: isActive ? 2 : 0,
-              borderBottomColor: isActive ? accent : 'transparent',
+              marginLeft: MENU_ITEM_GAP,
+              ...menuItemStyle(isActive),
             }}
           >
             <AppText
-              variant="label"
+              variant="caption"
+              numberOfLines={1}
+              adjustsFontSizeToFit
+              minimumFontScale={0.75}
               className={
                 isActive
                   ? onDark
-                    ? 'text-brand-ivory'
-                    : undefined
+                    ? 'uppercase font-sans-semibold tracking-normal text-brand-ivory'
+                    : 'uppercase font-sans-semibold tracking-normal text-brand-primary'
                   : onDark
-                    ? 'text-brand-ivory-soft'
-                    : undefined
+                    ? 'uppercase font-sans-semibold tracking-normal text-brand-ivory-soft'
+                    : 'uppercase font-sans-semibold tracking-normal'
               }
               style={
-                isActive && !onDark
-                  ? { color: accent }
-                  : !onDark
-                    ? { color: colors.text?.muted ?? '#8A7E72' }
-                    : undefined
+                !isActive && !onDark
+                  ? { fontSize: 12, color: colors.text?.muted ?? '#8A7E72' }
+                  : { fontSize: 12 }
               }
             >
               {pillar.label}
@@ -114,12 +143,10 @@ export function PillarHeader({
       {/* Brand row + account */}
       <View className="flex-row items-start justify-between px-xl pt-lg">
         <View className="flex-1 pr-md">
-          <AppText
+          <BrandName
             variant="h1"
             className={onDark ? 'text-brand-ivory' : undefined}
-          >
-            {APP.name}
-          </AppText>
+          />
           <AppText
             variant="quote"
             className={
@@ -141,24 +168,58 @@ export function PillarHeader({
           </AppText>
         </View>
 
-        <Link href="/account" asChild>
-          <Pressable
-            className="rounded-full px-md py-sm mt-xs"
-            style={{
-              backgroundColor: onDark ? brand.surface : colors.cream[50],
-              borderWidth: 1,
-              borderColor: onDark ? `${brand.ivory}33` : colors.cream[400],
-            }}
-          >
-            <AppText
-              variant="label"
-              className={onDark ? 'text-brand-marigold' : 'text-brand-primary'}
+        {isGuest ? (
+          <View className="flex-row gap-sm mt-xs shrink-0">
+            <Link href="/sign-in" asChild>
+              <Pressable
+                className="rounded-full px-md py-sm"
+                style={{
+                  backgroundColor: onDark ? brand.surface : colors.cream[50],
+                  borderWidth: 1,
+                  borderColor: onDark ? `${brand.ivory}33` : colors.cream[400],
+                }}
+              >
+                <AppText
+                  variant="label"
+                  className={onDark ? 'text-brand-ivory-soft' : undefined}
+                >
+                  Sign in
+                </AppText>
+              </Pressable>
+            </Link>
+            <Link href="/sign-up" asChild>
+              <Pressable
+                className="rounded-full px-md py-sm"
+                style={{ backgroundColor: brand.marigold }}
+              >
+                <AppText variant="label" style={{ color: brand.ink }}>
+                  Sign up
+                </AppText>
+              </Pressable>
+            </Link>
+          </View>
+        ) : (
+          <Link href="/account" asChild>
+            <Pressable
+              className="rounded-full px-md py-sm mt-xs shrink-0"
+              style={{
+                backgroundColor: onDark ? brand.surface : colors.cream[50],
+                borderWidth: 1,
+                borderColor: onDark ? `${brand.ivory}33` : colors.cream[400],
+              }}
             >
-              {isGuest ? 'Sign in' : user?.displayName.split(' ')[0]}
-            </AppText>
-          </Pressable>
-        </Link>
+              <AppText
+                variant="label"
+                className={onDark ? 'text-brand-marigold' : 'text-brand-primary'}
+              >
+                {user?.displayName.split(' ')[0]}
+              </AppText>
+            </Pressable>
+          </Link>
+        )}
       </View>
+
+      <PillarSwitcher active={active} tone={tone} />
 
       {active === 'home' ? (
         <View className="px-xl pt-md pb-lg">
@@ -186,54 +247,46 @@ export function PillarHeader({
         </View>
       ) : null}
 
-      <PillarSwitcher active={active} tone={tone} />
-
       {/* Active pillar title block */}
       {pillar ? (
         <View className="px-xl pt-md pb-md">
-          <View className="flex-row items-end justify-between">
-            <View className="flex-1 pr-md">
-              <AppText
-                variant="h2"
-                className={onDark ? 'text-brand-ivory' : undefined}
+          <AppText
+            variant="h2"
+            className={onDark ? 'text-brand-ivory' : undefined}
+          >
+            {pillar.title}
+          </AppText>
+          <AppText
+            variant="body"
+            className={onDark ? 'mt-xs text-brand-ivory-soft' : 'mt-xs'}
+          >
+            {pillar.subtitle}
+          </AppText>
+          {headerAction ??
+            (onCtaPress ? (
+              <Pressable
+                onPress={onCtaPress}
+                className="mt-md self-start rounded-lg px-md py-sm"
+                style={{
+                  backgroundColor: ctaActive ? `${accent}44` : `${accent}22`,
+                  borderWidth: ctaActive ? 1 : 0,
+                  borderColor: ctaActive ? accent : 'transparent',
+                }}
               >
-                {pillar.title}
-              </AppText>
-              <AppText
-                variant="body"
-                className={
-                  onDark ? 'mt-xs text-brand-ivory-soft' : 'mt-xs'
-                }
+                <AppText variant="label" style={{ color: accent }}>
+                  {pillar.cta}
+                </AppText>
+              </Pressable>
+            ) : (
+              <View
+                className="mt-md self-start rounded-lg px-md py-sm"
+                style={{ backgroundColor: `${accent}22` }}
               >
-                {pillar.subtitle}
-              </AppText>
-            </View>
-            {headerAction ??
-              (onCtaPress ? (
-                <Pressable
-                  onPress={onCtaPress}
-                  className="rounded-lg px-md py-sm"
-                  style={{
-                    backgroundColor: ctaActive ? `${accent}44` : `${accent}22`,
-                    borderWidth: ctaActive ? 1 : 0,
-                    borderColor: ctaActive ? accent : 'transparent',
-                  }}
-                >
-                  <AppText variant="label" style={{ color: accent }}>
-                    {pillar.cta}
-                  </AppText>
-                </Pressable>
-              ) : (
-                <View
-                  className="rounded-lg px-md py-sm"
-                  style={{ backgroundColor: `${accent}22` }}
-                >
-                  <AppText variant="label" style={{ color: accent }}>
-                    {pillar.cta}
-                  </AppText>
-                </View>
-              ))}
-          </View>
+                <AppText variant="label" style={{ color: accent }}>
+                  {pillar.cta}
+                </AppText>
+              </View>
+            ))}
           {pillar.phase === 'preview' ? (
             <AppText
               variant="caption"

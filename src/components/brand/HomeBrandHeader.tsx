@@ -2,6 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import { AppText } from '@/components/ui/Text';
+import { BrandName } from '@/components/brand/BrandName';
 import { APP } from '@/constants/app';
 import { BRAND_INTRO } from '@/content/brand';
 import { brand } from '@/theme';
@@ -17,9 +18,7 @@ export function HomeBrandHeader() {
         borderBottomColor: `${brand.ivory}33`,
       }}
     >
-      <AppText variant="h1" className="text-brand-ivory">
-        {APP.name}
-      </AppText>
+      <BrandName variant="h1" className="text-brand-ivory" />
       <AppText
         variant="quote"
         className="mt-xs text-brand-marigold font-serif-italic"

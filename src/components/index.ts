@@ -14,9 +14,11 @@ export { TileGrid } from './ui/TileGrid';
 // Brand
 export { KolkaMotif } from './brand/motifs/KolkaMotif';
 export { KolkaDivider } from './brand/KolkaDivider';
+export { BrandName } from './brand/BrandName';
 export { HomeBrandHeader } from './brand/HomeBrandHeader';
 export { HomeIntroSequence } from './brand/HomeIntroSequence';
 export { PillarHeader } from './navigation/PillarHeader';
+export { PillarScreen } from './navigation/PillarScreen';
 
 // Domain
 export { CollectionCard } from './collections/CollectionCard';

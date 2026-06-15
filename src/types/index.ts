@@ -231,3 +231,28 @@ export interface WishlistItem {
   kind: WishlistKind;
   addedAt: number; // epoch ms
 }
+
+// ----------------------------------------------------------------------------
+// User preferences — first sign-in onboarding
+// ----------------------------------------------------------------------------
+export type BengalConnection =
+  | 'diaspora'
+  | 'exploring'
+  | 'heritage'
+  | 'creative';
+
+export type HomeInterest =
+  | 'stories'
+  | 'crafts'
+  | 'food'
+  | 'music'
+  | 'travel'
+  | 'learn'
+  | 'shop'
+  | 'hire';
+
+export interface UserPreferences {
+  connection: BengalConnection;
+  interests: HomeInterest[];
+  completedAt: number;
+}

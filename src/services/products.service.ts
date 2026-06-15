@@ -28,3 +28,15 @@ export function getProductsByIds(ids: string[]): Promise<Product[]> {
 export function getProductsByCreator(creatorId: string): Promise<Product[]> {
   return mockResponse(products.filter((p) => p.creatorId === creatorId));
 }
+
+/** Filter products by title, subtitle, category, story, and tags. */
+export function filterProducts(items: Product[], query: string): Product[] {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return [];
+
+  return items.filter((product) => {
+    const haystack =
+      `${product.title} ${product.subtitle ?? ''} ${product.category} ${product.story} ${product.tags.join(' ')}`.toLowerCase();
+    return terms.every((term) => haystack.includes(term));
+  });
+}

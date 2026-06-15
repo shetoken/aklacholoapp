@@ -3,13 +3,12 @@ import { Pressable, ScrollView, TextInput, View } from 'react-native';
 import { Link } from 'expo-router';
 
 import {
-  Screen,
   AppText,
   ArticleTile,
   TopicTile,
   AutoScrollRow,
   KolkaDivider,
-  PillarHeader,
+  PillarScreen,
   SectionHeader,
   StorySearchBar,
   Loading,
@@ -94,22 +93,22 @@ export default function ExploreScreen() {
   };
 
   return (
-    <Screen scroll edges={[]} contentClassName="pb-2xl">
-      <PillarHeader
-        active="explore"
-        onCtaPress={toggleSearch}
-        ctaActive={searchOpen}
-      />
-
-      {searchOpen ? (
-        <StorySearchBar
-          value={query}
-          onChangeText={setQuery}
-          onClose={closeSearch}
-          inputRef={searchRef}
-        />
-      ) : null}
-
+    <PillarScreen
+      active="explore"
+      onCtaPress={toggleSearch}
+      ctaActive={searchOpen}
+      contentClassName="pb-2xl"
+      headerAccessory={
+        searchOpen ? (
+          <StorySearchBar
+            value={query}
+            onChangeText={setQuery}
+            onClose={closeSearch}
+            inputRef={searchRef}
+          />
+        ) : null
+      }
+    >
       {searching ? (
         <View>
           <SectionHeader
@@ -221,6 +220,6 @@ export default function ExploreScreen() {
           </Link>
         </>
       )}
-    </Screen>
+    </PillarScreen>
   );
 }

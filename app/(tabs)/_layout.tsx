@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/icons';
 
 /**
- * Bottom tab bar — Home · Discover · Experience · Shop · Hire
+ * Bottom tab bar — Home (icon) · Discover · Experience · Shop · Hire
  * Learn is a sub-tab inside Experience.
  */
 export default function TabsLayout() {
@@ -37,6 +37,7 @@ export default function TabsLayout() {
         name="index"
         options={{
           title: 'Home',
+          tabBarLabel: () => null,
           tabBarIcon: ({ color, focused }) => (
             <HomeIcon color={color} filled={focused} />
           ),

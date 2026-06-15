@@ -44,9 +44,9 @@ function ExperienceSubTabs() {
             onPress={() => router.replace(tab.href)}
             className="flex-1 items-center py-sm rounded-lg"
             style={{
-              backgroundColor: active ? `${brand.terracotta}22` : brand.surface,
+              backgroundColor: active ? `${brand.marigold}22` : brand.surface,
               borderWidth: 1,
-              borderColor: active ? brand.terracotta : `${brand.ivory}22`,
+              borderColor: active ? brand.marigold : `${brand.ivory}22`,
             }}
           >
             <AppText

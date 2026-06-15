@@ -22,3 +22,15 @@ export function getCreatorsByIds(ids: string[]): Promise<Creator[]> {
 export function getFeaturedCreators(limit = 4): Promise<Creator[]> {
   return mockResponse(creators.slice(0, limit));
 }
+
+/** Filter creators by name, discipline, region, and bio. */
+export function filterCreators(items: Creator[], query: string): Creator[] {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return [];
+
+  return items.filter((creator) => {
+    const haystack =
+      `${creator.name} ${creator.discipline} ${creator.region} ${creator.bio} ${creator.disciplineType}`.toLowerCase();
+    return terms.every((term) => haystack.includes(term));
+  });
+}

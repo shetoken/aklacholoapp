@@ -12,4 +12,5 @@ export * from './experiences.service';
 export * from './discover.service';
 export * from './journey.service';
 export * from './wishlist.service';
+export * from './preferences.service';
 export { NotFoundError, USE_MOCK, API_BASE_URL } from './api.client';

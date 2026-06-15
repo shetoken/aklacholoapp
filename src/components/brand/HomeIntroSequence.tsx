@@ -10,6 +10,7 @@ import { Link } from 'expo-router';
 import { MotiView } from 'moti';
 
 import { AppText } from '@/components/ui/Text';
+import { BrandName } from '@/components/brand/BrandName';
 import { KolkaMotif } from '@/components/brand/motifs/KolkaMotif';
 import { Img } from '@/components/ui/Img';
 import { APP } from '@/constants/app';
@@ -212,9 +213,10 @@ export function HomeIntroSequence({
             }}
             transition={{ type: 'timing', duration: 500 }}
           >
-            <AppText variant="display" className="text-center text-brand-ivory">
-              {APP.name}
-            </AppText>
+            <BrandName
+              variant="display"
+              className="text-center text-brand-ivory"
+            />
           </MotiView>
 
           <MotiView

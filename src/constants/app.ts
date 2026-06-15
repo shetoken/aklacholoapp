@@ -1,6 +1,8 @@
 /** App-wide brand constants. */
 export const APP = {
   name: 'AklaCholo',
+  namePrefix: 'Akla',
+  nameAccent: 'Cholo',
   tagline: 'Bengal, Everywhere',
   /** Used by section headers throughout Discover. */
   storyLabel: 'The Magic of Bengal',
