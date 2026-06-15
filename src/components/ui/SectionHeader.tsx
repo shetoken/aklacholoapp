@@ -7,15 +7,17 @@ export function SectionHeader({
   eyebrow,
   title,
   subtitle,
+  className = '',
 }: {
   eyebrow?: string;
   title: string;
   subtitle?: string;
+  className?: string;
 }) {
   return (
-    <View className="px-xl mb-lg">
+    <View className={`px-xl mb-lg ${className}`.trim()}>
       {eyebrow ? (
-        <AppText variant="label" className="text-brand-primary mb-xs">
+        <AppText variant="label" className="text-brand-terracotta mb-xs">
           {eyebrow}
         </AppText>
       ) : null}

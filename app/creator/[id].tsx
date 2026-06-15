@@ -80,7 +80,7 @@ export default function CreatorDetailScreen() {
                 onPress={() => Linking.openURL(s.url).catch(() => {})}
                 className="rounded-full bg-brand-surface-alt border border-brand-border px-md py-sm"
               >
-                <AppText variant="label" className="text-brand-primary">
+                <AppText variant="label" className="text-brand-terracotta">
                   {s.label}
                 </AppText>
               </Pressable>
@@ -118,7 +118,7 @@ export default function CreatorDetailScreen() {
                     {p.title}
                   </AppText>
                   {p.priceLabel ? (
-                    <AppText variant="label" className="text-brand-primary mt-xs">
+                    <AppText variant="label" className="text-brand-marigold mt-xs">
                       {p.priceLabel}
                     </AppText>
                   ) : null}

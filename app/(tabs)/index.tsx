@@ -1,17 +1,20 @@
-import React from 'react';
-import { Dimensions, Pressable, ScrollView, View } from 'react-native';
-import { Link } from 'expo-router';
-import { MotiView } from 'moti';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { InteractionManager, Pressable, ScrollView, View } from 'react-native';
+import { Link, useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import {
-  Screen,
   AppText,
-  SectionHeader,
-  CollectionCard,
   CreatorCard,
-  ArticleCard,
+  ProductTile,
+  ExperienceTile,
+  CollectionTile,
+  ArticleTile,
   KolkaDivider,
-  KolkaMotif,
+  PillarHeader,
+  AutoScrollRow,
+  JourneyPromoCard,
+  HomeIntroSequence,
   Loading,
   ErrorView,
 } from '@/components';
@@ -20,22 +23,88 @@ import { useAsync } from '@/hooks/useAsync';
 import {
   getFeaturedCollections,
   getFeaturedCreators,
-  getArticles,
+  getEncyclopediaArticles,
+  getFeaturedExperiences,
+  getProducts,
 } from '@/services';
 import { APP } from '@/constants/app';
-import { colors } from '@/theme';
+import { getPillar, EXPERIENCE_LEARN_HREF, EXPERIENCE_TRAVEL_HREF } from '@/constants/pillars';
+import { brand } from '@/theme';
+import { useJourney } from '@/context/JourneyProvider';
+import { shouldShowJourneyOnboarding } from '@/services';
 
-const { width } = Dimensions.get('window');
-const CARD_W = width * 0.72;
+const TILE = 108;
+
+function HomeSectionHeader({
+  pillar,
+  title,
+  subtitle,
+  tight = false,
+}: {
+  pillar: string;
+  title: string;
+  subtitle?: string;
+  tight?: boolean;
+}) {
+  return (
+    <View className={`px-xl mb-md ${tight ? 'mt-lg' : 'mt-2xl'}`}>
+      <AppText variant="label" className="text-brand-marigold mb-xs">
+        {pillar}
+      </AppText>
+      <AppText variant="h2" className="text-brand-ivory">
+        {title}
+      </AppText>
+      {subtitle ? (
+        <AppText variant="body" className="mt-xs text-brand-ivory-soft">
+          {subtitle}
+        </AppText>
+      ) : null}
+    </View>
+  );
+}
 
 export default function HomeScreen() {
-  const collections = useAsync(() => getFeaturedCollections(4), []);
-  const creators = useAsync(() => getFeaturedCreators(5), []);
-  const articles = useAsync(() => getArticles(), []);
+  const router = useRouter();
+  const onboardingShown = useRef(false);
+  const [showIntro, setShowIntro] = useState(true);
+  const journey = useJourney();
+  const collections = useAsync(() => getFeaturedCollections(8), []);
+  const creators = useAsync(() => getFeaturedCreators(8), []);
+  const encyclopedia = useAsync(() => getEncyclopediaArticles(), []);
+  const experiences = useAsync(() => getFeaturedExperiences(6), []);
+  const products = useAsync(() => getProducts(), []);
+
+  const finishIntro = useCallback(() => setShowIntro(false), []);
 
   const loading =
-    collections.loading || creators.loading || articles.loading;
-  const error = collections.error || creators.error || articles.error;
+    collections.loading ||
+    creators.loading ||
+    encyclopedia.loading ||
+    experiences.loading ||
+    products.loading;
+  const error =
+    collections.error ||
+    creators.error ||
+    encyclopedia.error ||
+    experiences.error ||
+    products.error;
+
+  useEffect(() => {
+    if (loading || showIntro) return;
+    if (
+      !journey.ready ||
+      !journey.progress ||
+      onboardingShown.current ||
+      !shouldShowJourneyOnboarding(journey.progress)
+    ) {
+      return;
+    }
+    onboardingShown.current = true;
+    const task = InteractionManager.runAfterInteractions(() => {
+      router.push('/journey-onboarding');
+    });
+    return () => task.cancel();
+  }, [loading, showIntro, journey.ready, journey.progress, router]);
 
   if (loading) return <Loading label="Gathering Bengal…" />;
   if (error)
@@ -44,114 +113,184 @@ export default function HomeScreen() {
         onRetry={() => {
           collections.reload();
           creators.reload();
-          articles.reload();
+          encyclopedia.reload();
+          experiences.reload();
+          products.reload();
         }}
       />
     );
 
-  const featureArticle = articles.data?.[0];
+  const shopProducts = products.data ?? [];
+  const collectionItems = collections.data ?? [];
+  const creatorItems = creators.data ?? [];
+  const encyclopediaItems = encyclopedia.data ?? [];
+  const experienceItems = experiences.data ?? [];
 
   return (
-    <Screen scroll edges={['top']} contentClassName="pb-2xl">
-      {/* Hero */}
-      <MotiView
-        from={{ opacity: 0, translateY: 12 }}
-        animate={{ opacity: 1, translateY: 0 }}
-        transition={{ type: 'timing', duration: 600 }}
-      >
-        <View className="px-xl pt-2xl pb-lg items-center">
-          <KolkaMotif
-            svgKey="lotus"
-            size={56}
-            palette={[colors.terracotta[500], colors.marigold[400], colors.cream[100], colors.indigo[500]]}
-          />
-          <AppText variant="display" className="mt-md text-center">
-            {APP.name}
-          </AppText>
-          <AppText variant="quote" className="mt-sm text-center">
-            {APP.tagline}
-          </AppText>
-        </View>
-      </MotiView>
-
-      <KolkaDivider />
-
-      {/* Curated collections */}
-      <SectionHeader
-        eyebrow="Curated"
-        title="Collections"
-        subtitle="Stories told through objects"
-      />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24 }}
-      >
-        {collections.data?.map((c) => (
-          <CollectionCard key={c.id} collection={c} width={CARD_W} />
-        ))}
-      </ScrollView>
-
-      <View className="h-2xl" />
-
-      {/* Featured story */}
-      {featureArticle ? (
+    <SafeAreaView
+      edges={['top']}
+      style={{ flex: 1, backgroundColor: brand.indigo }}
+    >
+      {showIntro ? (
+        <HomeIntroSequence products={shopProducts} onComplete={finishIntro} />
+      ) : (
         <>
-          <SectionHeader eyebrow={APP.storyLabel} title="The story behind the craft" />
-          <ArticleCard article={featureArticle} />
+          <PillarHeader active="home" tone="dark" />
+
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 48 }}
+          >
+            <View className="mx-xl mt-lg mb-sm">
+              <JourneyPromoCard variant="compact" />
+            </View>
+
+            <HomeSectionHeader
+              tight
+              pillar={getPillar('explore').label}
+              title="Culture & stories"
+              subtitle="Festivals, encyclopedia, and the kolka universe"
+            />
+            <AutoScrollRow
+              data={encyclopediaItems}
+              keyExtractor={(a) => a.id}
+              speed={0.22}
+              renderItem={(a) => (
+                <ArticleTile article={a} size={TILE} onDark />
+              )}
+            />
+            <Link href="/explore" asChild>
+              <Pressable className="flex-row items-center justify-end px-xl mt-md mb-sm">
+                <AppText variant="label" className="text-brand-marigold mr-xs">
+                  Browse stories
+                </AppText>
+                <ChevronRight color={brand.marigold} />
+              </Pressable>
+            </Link>
+
+            <HomeSectionHeader
+              tight
+              pillar={getPillar('experience').label}
+              title="Learn about Bengal"
+              subtitle="Classes in language, art, music, dance, and history — coming soon"
+            />
+            <Link href={EXPERIENCE_LEARN_HREF} asChild>
+              <Pressable
+                className="mx-xl rounded-xl bg-brand-surface p-lg mb-sm"
+                style={{ borderWidth: 1, borderColor: `${brand.ivory}33` }}
+              >
+                <AppText variant="title" className="text-brand-ivory">
+                  Start learning
+                </AppText>
+                <AppText variant="caption" className="text-brand-ivory-soft mt-xs">
+                  Preview upcoming lessons
+                </AppText>
+              </Pressable>
+            </Link>
+
+            <HomeSectionHeader
+              tight
+              pillar={getPillar('experience').title}
+              title="Travel Guide to Bengal"
+              subtitle="Curated experiences with trusted local guides"
+            />
+            <AutoScrollRow
+              data={experienceItems}
+              keyExtractor={(e) => e.id}
+              speed={0.18}
+              renderItem={(e) => <ExperienceTile experience={e} />}
+            />
+            <Link href={EXPERIENCE_TRAVEL_HREF} asChild>
+              <Pressable className="flex-row items-center justify-end px-xl mt-md mb-sm">
+                <AppText variant="label" className="text-brand-marigold mr-xs">
+                  Browse Experience
+                </AppText>
+                <ChevronRight color={brand.marigold} />
+              </Pressable>
+            </Link>
+
+            <HomeSectionHeader
+              tight
+              pillar={getPillar('shop').label}
+              title="Find Exquisute Bengali Art & Crafts"
+            />
+            <AutoScrollRow
+              data={shopProducts}
+              keyExtractor={(p) => p.id}
+              speed={0.3}
+              renderItem={(p) => (
+                <ProductTile product={p} size={TILE} onDark />
+              )}
+            />
+            <Link href="/shop" asChild>
+              <Pressable className="flex-row items-center justify-end px-xl mt-md mb-sm">
+                <AppText variant="label" className="text-brand-marigold mr-xs">
+                  View collection
+                </AppText>
+                <ChevronRight color={brand.marigold} />
+              </Pressable>
+            </Link>
+
+            <HomeSectionHeader
+              tight
+              pillar={getPillar('hire').label}
+              title="Bengali talent"
+              subtitle="Artisans, animators, designers, and teachers"
+            />
+            <AutoScrollRow
+              data={creatorItems}
+              keyExtractor={(c) => c.id}
+              speed={0.25}
+              gap={4}
+              renderItem={(c) => (
+                <CreatorCard creator={c} width={100} onDark />
+              )}
+            />
+            <Link href="/hire" asChild>
+              <Pressable className="flex-row items-center justify-end px-xl mt-sm mb-sm">
+                <AppText variant="label" className="text-brand-marigold mr-xs">
+                  Find talent
+                </AppText>
+                <ChevronRight color={brand.marigold} />
+              </Pressable>
+            </Link>
+
+            <HomeSectionHeader
+              tight
+              pillar="Curated"
+              title="Collections"
+              subtitle="Stories told through objects"
+            />
+            <AutoScrollRow
+              data={collectionItems}
+              keyExtractor={(c) => c.id}
+              speed={0.28}
+              renderItem={(c) => (
+                <CollectionTile collection={c} size={TILE} onDark />
+              )}
+            />
+
+            <KolkaDivider showBindu />
+
+            <Link href="/motifs" asChild>
+              <Pressable
+                className="mx-xl rounded-xl bg-brand-surface p-xl mt-lg"
+                style={{ borderWidth: 1, borderColor: `${brand.ivory}33` }}
+              >
+                <AppText variant="label" className="text-brand-marigold mb-xs">
+                  {APP.storyLabel}
+                </AppText>
+                <AppText variant="h3" className="text-brand-ivory">
+                  Explore the Kolka Studio
+                </AppText>
+                <AppText variant="body" className="text-brand-ivory-soft mt-xs">
+                  Play with motifs and palettes
+                </AppText>
+              </Pressable>
+            </Link>
+          </ScrollView>
         </>
-      ) : null}
-
-      <View className="h-lg" />
-
-      {/* Featured creators */}
-      <SectionHeader
-        eyebrow="The makers"
-        title="Creators"
-        subtitle="Artisans, designers, and teachers"
-      />
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={{ paddingHorizontal: 24, paddingVertical: 8 }}
-      >
-        {creators.data?.map((c) => (
-          <CreatorCard key={c.id} creator={c} width={120} />
-        ))}
-      </ScrollView>
-
-      <KolkaDivider />
-
-      {/* Motif studio CTA */}
-      <Link href="/motifs" asChild>
-        <Pressable className="mx-xl rounded-2xl bg-brand-secondary p-xl flex-row items-center justify-between">
-          <View className="flex-1 pr-md">
-            <AppText variant="label" className="text-marigold-300 mb-xs">
-              Interactive
-            </AppText>
-            <AppText variant="h3" className="text-cream-50">
-              Explore the Kolka Studio
-            </AppText>
-            <AppText variant="body" className="text-cream-200 mt-xs">
-              Play with motifs and palettes
-            </AppText>
-          </View>
-          <KolkaMotif
-            svgKey="classic"
-            size={64}
-            palette={[colors.marigold[400], colors.cream[100], colors.cream[50], colors.terracotta[400]]}
-          />
-        </Pressable>
-      </Link>
-
-      <Link href="/discover" asChild>
-        <Pressable className="flex-row items-center justify-center mt-xl">
-          <AppText variant="label" className="text-brand-primary">
-            Discover everything
-          </AppText>
-          <ChevronRight color={colors.terracotta[500]} />
-        </Pressable>
-      </Link>
-    </Screen>
+      )}
+    </SafeAreaView>
   );
 }

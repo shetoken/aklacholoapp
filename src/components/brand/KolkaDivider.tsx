@@ -1,33 +1,41 @@
 import React from 'react';
 import { View } from 'react-native';
 import Svg, { Path, Circle } from 'react-native-svg';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 /**
- * A subtle kolka-accented divider — a thin rule with a small centred paisley.
- * Used between sections to add heritage texture without clutter.
+ * Kolka-accented divider — ivory linework with an optional vermillion bindu
+ * at centre. Kalighat-inspired section break on dark grounds.
  */
 export function KolkaDivider({
-  color = colors.terracotta[400],
+  lineColor = brand.kolka,
+  binduColor = brand.bindu,
   width = 160,
+  showBindu = true,
 }: {
-  color?: string;
+  lineColor?: string;
+  binduColor?: string;
   width?: number;
+  showBindu?: boolean;
 }) {
   return (
     <View className="items-center my-xl">
-      <Svg width={width} height={20} viewBox="0 0 160 20">
-        <Path d="M0 10 H64" stroke={color} strokeWidth={1.5} opacity={0.5} />
-        <Path d="M96 10 H160" stroke={color} strokeWidth={1.5} opacity={0.5} />
+      <Svg width={width} height={24} viewBox="0 0 160 24">
+        <Path d="M0 12 H58" stroke={lineColor} strokeWidth={1.5} opacity={0.55} />
+        <Path d="M102 12 H160" stroke={lineColor} strokeWidth={1.5} opacity={0.55} />
         <Path
-          d="M80 3 c -7 0 -10 7 -6 13 c 3 4 9 4 11 0 c 2 -3 0 -7 -3 -7"
+          d="M80 4 c -7 0 -10 7 -6 13 c 3 4 9 4 11 0 c 2 -3 0 -7 -3 -7"
           fill="none"
-          stroke={color}
+          stroke={lineColor}
           strokeWidth={1.8}
           strokeLinecap="round"
+          opacity={0.85}
         />
-        <Circle cx={70} cy={10} r={1.6} fill={color} />
-        <Circle cx={90} cy={10} r={1.6} fill={color} />
+        <Circle cx={66} cy={12} r={1.4} fill={lineColor} opacity={0.6} />
+        <Circle cx={94} cy={12} r={1.4} fill={lineColor} opacity={0.6} />
+        {showBindu ? (
+          <Circle cx={80} cy={12} r={3.2} fill={binduColor} />
+        ) : null}
       </Svg>
     </View>
   );

@@ -1,59 +1,55 @@
 /**
  * AklaCholo brand design tokens — SINGLE SOURCE OF TRUTH.
  *
- * Plain CommonJS so it can be required by both `tailwind.config.js` (NativeWind
- * class generation) and the typed theme in `src/theme/index.ts`. Change a brand
- * value here once and it propagates everywhere.
+ * Kalighat + kolka folk art: deep indigo grounds, luminous ivory linework,
+ * marigold glow, vermillion bindu (sparingly).
  *
- * Palette: warm, earthy, premium — terracotta · indigo · marigold · cream ·
- * deep green. Heritage craft meets modern minimalism.
+ * Canonical hex values live in `core`. Scales + semantic aliases are derived
+ * from `core` for NativeWind (`bg-brand-*`, `text-brand-*`) and typed theme.
  */
 
+/** Exact palette — the seven named colours. */
+const core = {
+  ink: '#0E0E12', // near-black, deepest background
+  indigo: '#1A1F3A', // primary deep-indigo background
+  surface: '#232842', // cards / raised surfaces
+  ivory: '#F4EFE6', // warm white — kolka linework + primary text on dark
+  marigold: '#E8A92C', // gold highlights, the glow
+  vermillion: '#D72E1F', // bindu — use once per screen, never as fill
+  terracotta: '#C66B3D', // secondary warmth
+};
+
+/** Tailwind scales anchored on `core` (+ legacy light-mode text / cream). */
 const palette = {
-  // Terracotta — primary brand / clay
-  terracotta: {
-    50: '#FBEEE8',
-    100: '#F3D6C8',
-    200: '#E6AD93',
-    300: '#D9835E',
-    400: '#CE6A45',
-    500: '#C45A3B', // base
-    600: '#A8482D',
-    700: '#853722',
-    800: '#5F2719',
-    900: '#3D190F',
-  },
-  // Indigo — Bengal dye, deep contrast
   indigo: {
-    50: '#EAECF2',
-    100: '#C6CBDC',
-    200: '#9AA3BF',
-    300: '#6C78A0',
-    400: '#48567F',
-    500: '#2E3A59', // base
-    600: '#283350',
-    700: '#1F2840',
-    800: '#161C2E',
-    900: '#0D111C',
+    50: '#E8EAF2',
+    100: '#C5CAD9',
+    200: '#9BA3BF',
+    300: '#717BA0',
+    400: '#525D82',
+    500: '#3A4166',
+    600: '#2E3554',
+    700: core.surface,
+    800: core.indigo,
+    900: core.ink,
   },
-  // Marigold — festive accent
-  marigold: {
-    50: '#FDF4E2',
-    100: '#FAE3B6',
-    200: '#F4CB7C',
-    300: '#EEB34D',
-    400: '#E8A33D', // base
-    500: '#D78D24',
-    600: '#B0711B',
-    700: '#855416',
-    800: '#5C3A0F',
-    900: '#3A2509',
+  ivory: {
+    50: '#FDFBF7',
+    100: core.ivory,
+    200: '#E8E2D6',
+    300: '#D4CBBE',
+    400: '#B8AE9E',
+    500: '#9A8F7E',
+    600: '#7A7164',
+    700: '#5C554B',
+    800: '#3D3832',
+    900: '#221F1C',
   },
-  // Cream — surfaces / background
+  // Alias — other screens still reference `cream` until migrated
   cream: {
     50: '#FDFBF6',
     100: '#FAF5EB',
-    200: '#F7F0E3', // base — app background
+    200: '#F7F0E3',
     300: '#EFE5D2',
     400: '#E3D5BC',
     500: '#D4C2A2',
@@ -62,49 +58,105 @@ const palette = {
     800: '#615543',
     900: '#3A3327',
   },
-  // Deep green — temple foliage / calm
-  green: {
-    50: '#E8F0ED',
-    100: '#C5D9D1',
-    200: '#9DBEB1',
-    300: '#74A290',
-    400: '#4E8470',
-    500: '#2F5D50', // base
-    600: '#284E44',
-    700: '#1F3D35',
-    800: '#152A25',
-    900: '#0C1916',
+  marigold: {
+    50: '#FDF6E6',
+    100: '#FAEBC4',
+    200: '#F5D88A',
+    300: '#EFC456',
+    400: core.marigold,
+    500: '#D49520',
+    600: '#B07A18',
+    700: '#855C12',
+    800: '#5C400D',
+    900: '#3A2808',
   },
-  // Ink / neutral text
+  terracotta: {
+    50: '#F9EDE6',
+    100: '#EFD4C4',
+    200: '#E0B096',
+    300: '#D08C68',
+    400: core.terracotta,
+    500: core.terracotta,
+    600: '#A85532',
+    700: '#854228',
+    800: '#5F2F1C',
+    900: '#3D1E12',
+  },
+  vermillion: {
+    50: '#FDEAE8',
+    100: '#FAC5C0',
+    200: '#F5938A',
+    300: '#EF6154',
+    400: '#E84334',
+    500: core.vermillion,
+    600: '#B82618',
+    700: '#8C1D12',
+    800: '#60140D',
+    900: '#3A0C08',
+  },
+  green: {
+    50: '#E6EEE9',
+    100: '#C2D9CE',
+    200: '#98BFAE',
+    300: '#6EA48E',
+    400: '#4E8770',
+    500: '#3A6B58',
+    600: '#305849',
+    700: '#254539',
+    800: '#193028',
+    900: '#0E1C18',
+  },
+  /** Legacy body text on light (cream) screens — unchanged tabs. */
+  text: {
+    DEFAULT: '#2A2420',
+    soft: '#5A5048',
+    muted: '#8A7E72',
+    faint: '#B7AC9E',
+  },
+  /** @deprecated use `text` — kept so unchanged screens compile. */
   ink: {
     DEFAULT: '#2A2420',
     soft: '#5A5048',
     muted: '#8A7E72',
     faint: '#B7AC9E',
   },
-  white: '#FFFFFF',
-  black: '#1A1612',
+  white: core.ivory,
+  black: core.ink,
 };
 
-/** Semantic aliases — what UI code should prefer over raw scale steps. */
+/** Semantic aliases for `bg-brand-*`, `text-brand-*`, SVG, navigation. */
 const semantic = {
-  primary: palette.terracotta[500],
+  // Canonical names (match the brief)
+  ink: core.ink,
+  indigo: core.indigo,
+  surface: core.surface,
+  ivory: core.ivory,
+  marigold: core.marigold,
+  vermillion: core.vermillion,
+  terracotta: core.terracotta,
+  kolka: core.ivory,
+  bindu: core.vermillion,
+  // Derived
+  border: palette.indigo[500],
+  'ivory-soft': '#C9C2B8',
+  'ivory-muted': '#8A8498',
+  // Legacy aliases (light-mode screens + existing components)
+  primary: core.terracotta,
   primaryDark: palette.terracotta[700],
-  secondary: palette.indigo[500],
-  accent: palette.marigold[400],
-  highlight: palette.green[500],
-  background: palette.cream[200],
-  surface: palette.cream[50],
-  surfaceAlt: palette.cream[100],
-  border: palette.cream[400],
-  textPrimary: palette.ink.DEFAULT,
-  textSecondary: palette.ink.soft,
-  textMuted: palette.ink.muted,
-  onPrimary: palette.cream[50],
+  secondary: core.surface,
+  accent: core.marigold,
+  highlight: core.marigold,
+  background: core.indigo,
+  backgroundDeep: core.ink,
+  surfaceAlt: palette.indigo[600],
+  textPrimary: palette.text.DEFAULT,
+  textSecondary: palette.text.soft,
+  textMuted: palette.text.muted,
+  textOnDark: core.ivory,
+  onPrimary: core.ivory,
 };
 
 const fontFamily = {
-  // Loaded via @expo-google-fonts in src/theme/fonts.ts
   serif: ['Fraunces_500Medium'],
   'serif-bold': ['Fraunces_600SemiBold'],
   'serif-italic': ['Fraunces_500Medium_Italic'],
@@ -133,4 +185,4 @@ const radius = {
   full: 9999,
 };
 
-module.exports = { palette, semantic, fontFamily, spacing, radius };
+module.exports = { core, palette, semantic, fontFamily, spacing, radius };

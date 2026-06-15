@@ -11,10 +11,17 @@ import { SaveButton } from '@/components/ui/SaveButton';
 export function CollectionCard({
   collection,
   width,
+  onDark = true,
 }: {
   collection: Collection;
   width?: number;
+  /** Kalighat dark surface — ivory type. */
+  onDark?: boolean;
 }) {
+  const labelCls = onDark ? 'text-brand-terracotta mb-xs' : 'text-brand-terracotta mb-xs';
+  const titleCls = onDark ? 'text-brand-ivory' : 'text-brand-ivory';
+  const captionCls = onDark ? 'mt-xs text-brand-ivory-soft' : 'mt-xs text-brand-ivory-soft';
+
   return (
     <Link href={`/collection/${collection.id}`} asChild>
       <MotiPressable
@@ -24,7 +31,9 @@ export function CollectionCard({
         }}
         style={width ? { width } : undefined}
       >
-        <View className="rounded-2xl overflow-hidden bg-brand-surface mr-lg">
+        <View
+          className="rounded-2xl overflow-hidden bg-brand-surface mr-lg border border-brand-border"
+        >
           <View>
             <Img
               source={collection.cover}
@@ -36,11 +45,13 @@ export function CollectionCard({
             </View>
           </View>
           <View className="p-lg">
-            <AppText variant="label" className="text-brand-primary mb-xs">
+            <AppText variant="label" className={labelCls}>
               Collection
             </AppText>
-            <AppText variant="title">{collection.title}</AppText>
-            <AppText variant="caption" className="mt-xs" numberOfLines={2}>
+            <AppText variant="title" className={titleCls}>
+              {collection.title}
+            </AppText>
+            <AppText variant="caption" className={captionCls} numberOfLines={2}>
               {collection.tagline}
             </AppText>
           </View>

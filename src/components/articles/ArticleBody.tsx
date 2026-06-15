@@ -30,7 +30,7 @@ export function ArticleBody({ sections }: { sections: ArticleSection[] }) {
           <AppText variant="bodyLg">{section.body}</AppText>
 
           {section.pullQuote ? (
-            <View className="border-l-2 border-brand-primary pl-lg my-lg">
+            <View className="border-l-2 border-brand-marigold pl-lg my-lg">
               <AppText variant="quote">{section.pullQuote}</AppText>
             </View>
           ) : null}

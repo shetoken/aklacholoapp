@@ -19,16 +19,16 @@ export type TextVariant =
   | 'quote';
 
 const VARIANT: Record<TextVariant, string> = {
-  display: 'font-serif-bold text-5xl leading-tight text-brand-ink',
-  h1: 'font-serif-bold text-4xl leading-tight text-brand-ink',
-  h2: 'font-serif-bold text-2xl leading-snug text-brand-ink',
-  h3: 'font-serif text-xl leading-snug text-brand-ink',
-  title: 'font-serif text-lg leading-snug text-brand-ink',
-  body: 'font-sans text-base leading-relaxed text-brand-ink-soft',
-  bodyLg: 'font-sans text-lg leading-relaxed text-brand-ink-soft',
-  caption: 'font-sans text-sm leading-normal text-brand-ink-muted',
-  label: 'font-sans-semibold text-xs uppercase tracking-widest text-brand-ink-muted',
-  quote: 'font-serif-italic text-xl leading-relaxed text-brand-primary',
+  display: 'font-serif-bold text-5xl leading-tight text-brand-ivory',
+  h1: 'font-serif-bold text-4xl leading-tight text-brand-ivory',
+  h2: 'font-serif-bold text-2xl leading-snug text-brand-ivory',
+  h3: 'font-serif text-xl leading-snug text-brand-ivory',
+  title: 'font-serif text-lg leading-snug text-brand-ivory',
+  body: 'font-sans text-base leading-relaxed text-brand-ivory-soft',
+  bodyLg: 'font-sans text-lg leading-relaxed text-brand-ivory-soft',
+  caption: 'font-sans text-sm leading-normal text-brand-muted',
+  label: 'font-sans-semibold text-xs uppercase tracking-widest text-brand-muted',
+  quote: 'font-serif-italic text-xl leading-relaxed text-brand-marigold',
 };
 
 export interface AppTextProps extends RNTextProps {

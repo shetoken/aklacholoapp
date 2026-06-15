@@ -1,26 +1,24 @@
 import React from 'react';
 import Svg, { Path, Circle, G } from 'react-native-svg';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 /**
  * Placeholder kolka (paisley) motifs drawn as SVG. Each takes an ordered color
  * list (a Palette.colors array): [0] = fill, [1] = inner accent, [2] = detail,
- * [3] = background dot/optional. Swap these for richer artwork later without
- * changing call sites — the registry keys stay stable.
+ * [3] = background dot/optional.
  */
 export interface KolkaMotifProps {
   size?: number;
-  /** Ordered palette colors. Falls back to brand defaults. */
   palette?: string[];
 }
 
 type MotifComponent = React.FC<KolkaMotifProps>;
 
 const fallback = [
-  colors.terracotta[500],
-  colors.marigold[400],
-  colors.cream[100],
-  colors.indigo[500],
+  brand.terracotta,
+  brand.marigold,
+  brand.ivory,
+  brand.indigo,
 ];
 
 function useColors(palette?: string[]) {

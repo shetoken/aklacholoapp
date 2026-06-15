@@ -1,7 +1,7 @@
 import '../global.css';
 
-import React, { useCallback } from 'react';
-import { View } from 'react-native';
+import React, { useCallback, useEffect } from 'react';
+import { ActivityIndicator, View } from 'react-native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
@@ -9,8 +9,10 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { useBrandFonts } from '@/theme/fonts';
-import { colors, fonts } from '@/theme';
+import { brand, fonts } from '@/theme';
 import { WishlistProvider } from '@/context/WishlistProvider';
+import { AuthProvider } from '@/context/AuthProvider';
+import { JourneyProvider } from '@/context/JourneyProvider';
 
 SplashScreen.preventAutoHideAsync().catch(() => {});
 
@@ -23,24 +25,45 @@ export default function RootLayout() {
     }
   }, [fontsLoaded, fontError]);
 
+  useEffect(() => {
+    if (fontsLoaded || fontError) return;
+    const timer = setTimeout(() => {
+      SplashScreen.hideAsync().catch(() => {});
+    }, 4000);
+    return () => clearTimeout(timer);
+  }, [fontsLoaded, fontError]);
+
   if (!fontsLoaded && !fontError) {
-    // Keep the native splash up until fonts resolve.
-    return null;
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: brand.indigo,
+        }}
+        onLayout={onReady}
+      >
+        <ActivityIndicator color={brand.marigold} size="large" />
+      </View>
+    );
   }
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
         <WishlistProvider>
+          <AuthProvider>
+          <JourneyProvider>
           <View style={{ flex: 1 }} onLayout={onReady}>
-            <StatusBar style="dark" />
+            <StatusBar style="light" />
             <Stack
               screenOptions={{
                 headerShown: false,
-                contentStyle: { backgroundColor: colors.cream[200] },
-                headerStyle: { backgroundColor: colors.cream[200] },
-                headerTintColor: colors.terracotta[600],
-                headerTitleStyle: { fontFamily: fonts.serifBold },
+                contentStyle: { backgroundColor: brand.indigo },
+                headerStyle: { backgroundColor: brand.indigo },
+                headerTintColor: brand.ivory,
+                headerTitleStyle: { fontFamily: fonts.serifBold, color: brand.ivory },
                 headerShadowVisible: false,
                 headerBackTitle: 'Back',
               }}
@@ -63,11 +86,33 @@ export default function RootLayout() {
                 options={{ headerShown: true, title: '' }}
               />
               <Stack.Screen
+                name="travel/[id]"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
                 name="motifs"
                 options={{ headerShown: true, title: 'Kolka Studio' }}
               />
+              <Stack.Screen
+                name="account"
+                options={{ headerShown: true, title: 'Account' }}
+              />
+              <Stack.Screen
+                name="journey"
+                options={{ headerShown: true, title: 'Journey Through Bengal' }}
+              />
+              <Stack.Screen
+                name="journey-onboarding"
+                options={{ headerShown: true, title: '' }}
+              />
+              <Stack.Screen
+                name="journey-reward"
+                options={{ headerShown: true, title: 'Bengal Explorer' }}
+              />
             </Stack>
           </View>
+          </JourneyProvider>
+          </AuthProvider>
         </WishlistProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>

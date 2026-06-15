@@ -1,13 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, View } from 'react-native';
 import { AppText } from './Text';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 /** Centered loading spinner for async screens. */
 export function Loading({ label }: { label?: string }) {
   return (
     <View className="flex-1 items-center justify-center bg-brand-bg py-4xl">
-      <ActivityIndicator color={colors.terracotta[500]} size="large" />
+      <ActivityIndicator color={brand.marigold} size="large" />
       {label ? (
         <AppText variant="caption" className="mt-lg">
           {label}
@@ -33,7 +33,7 @@ export function ErrorView({
       {onRetry ? (
         <AppText
           variant="label"
-          className="mt-lg text-brand-primary"
+          className="mt-lg text-brand-marigold"
           onPress={onRetry}
         >
           Tap to retry

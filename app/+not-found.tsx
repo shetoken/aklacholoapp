@@ -18,7 +18,7 @@ export default function NotFoundScreen() {
         <View className="mt-lg">
           <Link href="/" asChild>
             <Pressable>
-              <AppText variant="label" className="text-brand-primary">
+              <AppText variant="label" className="text-brand-marigold">
                 Back to home
               </AppText>
             </Pressable>

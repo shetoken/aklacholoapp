@@ -3,7 +3,7 @@ import { Pressable, View } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
 import type { WishlistKind } from '@/types';
 import { useWishlist } from '@/context/WishlistProvider';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 /**
  * Heart toggle wired to the wishlist context. Works for products, collections,
@@ -15,12 +15,15 @@ export function SaveButton({
   kind,
   size = 22,
   floating = false,
+  compact = false,
 }: {
   id: string;
   kind: WishlistKind;
   size?: number;
   /** Render as a circular surface (over imagery). */
   floating?: boolean;
+  /** Tighter padding for small masonry tiles. */
+  compact?: boolean;
 }) {
   const { isSaved, toggle } = useWishlist();
   const saved = isSaved(id, kind);
@@ -29,8 +32,8 @@ export function SaveButton({
     <Svg width={size} height={size} viewBox="0 0 24 24">
       <Path
         d="M12 21s-7.5-4.6-10-9.2C.6 9 1.7 5.5 4.8 5c2-.3 3.4.8 4.2 2 .8-1.2 2.2-2.3 4.2-2 3.1.5 4.2 4 2.8 6.8C19.5 16.4 12 21 12 21z"
-        fill={saved ? colors.terracotta[500] : 'transparent'}
-        stroke={saved ? colors.terracotta[500] : colors.ink.DEFAULT}
+        fill={saved ? brand.vermillion : 'transparent'}
+        stroke={saved ? brand.vermillion : brand.ivory}
         strokeWidth={1.8}
         strokeLinejoin="round"
       />
@@ -45,7 +48,9 @@ export function SaveButton({
       accessibilityLabel={saved ? 'Remove from saved' : 'Save'}
     >
       {floating ? (
-        <View className="rounded-full bg-brand-surface/90 p-sm shadow-sm">
+        <View
+          className={`rounded-full bg-brand-surface/90 ${compact ? 'p-[3px]' : 'p-sm shadow-sm'}`}
+        >
           {heart}
         </View>
       ) : (

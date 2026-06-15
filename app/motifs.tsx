@@ -13,7 +13,7 @@ import {
 import { useAsync } from '@/hooks/useAsync';
 import { getMotifs, getPalettes } from '@/services';
 import type { Palette } from '@/types';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 export default function MotifsScreen() {
   const motifs = useAsync(() => getMotifs(), []);
@@ -44,7 +44,7 @@ export default function MotifsScreen() {
   return (
     <Screen scroll edges={[]} contentClassName="pb-2xl">
       <View className="px-xl pt-md">
-        <AppText variant="label" className="text-brand-primary mb-xs">
+        <AppText variant="label" className="text-brand-terracotta mb-xs">
           Interactive
         </AppText>
         <AppText variant="h1">Kolka Studio</AppText>
@@ -61,7 +61,7 @@ export default function MotifsScreen() {
           style={{
             width: 240,
             height: 240,
-            backgroundColor: activePalette?.colors[3] ?? colors.cream[100],
+            backgroundColor: activePalette?.colors[3] ?? brand.surface,
           }}
         >
           <MotiView
@@ -88,7 +88,7 @@ export default function MotifsScreen() {
       <KolkaDivider />
 
       {/* Motif picker */}
-      <AppText variant="label" className="px-xl mb-md text-brand-ink-muted">
+      <AppText variant="label" className="px-xl mb-md text-brand-muted">
         Choose a motif
       </AppText>
       <ScrollView
@@ -107,7 +107,7 @@ export default function MotifsScreen() {
               }}
               className={`rounded-2xl p-md items-center justify-center border ${
                 active
-                  ? 'border-brand-primary bg-brand-surface'
+                  ? 'border-brand-marigold bg-brand-surface'
                   : 'border-brand-border bg-brand-surface-alt'
               }`}
               style={{ width: 92, height: 92 }}
@@ -119,7 +119,7 @@ export default function MotifsScreen() {
       </ScrollView>
 
       {/* Palette picker */}
-      <AppText variant="label" className="px-xl mt-2xl mb-md text-brand-ink-muted">
+      <AppText variant="label" className="px-xl mt-2xl mb-md text-brand-muted">
         Choose a palette
       </AppText>
       <View className="px-xl">
@@ -130,7 +130,7 @@ export default function MotifsScreen() {
               key={p.id}
               onPress={() => setPaletteId(p.id)}
               className={`flex-row items-center rounded-xl p-md mb-md border ${
-                active ? 'border-brand-primary' : 'border-brand-border'
+                active ? 'border-brand-marigold' : 'border-brand-border'
               } bg-brand-surface`}
             >
               <View className="flex-row mr-md">
@@ -144,7 +144,7 @@ export default function MotifsScreen() {
                       borderRadius: 6,
                       marginLeft: i === 0 ? 0 : -6,
                       borderWidth: 1,
-                      borderColor: colors.cream[50],
+                      borderColor: `${brand.ivory}44`,
                     }}
                   />
                 ))}

@@ -10,10 +10,16 @@ import { AppText } from '@/components/ui/Text';
 export function CreatorCard({
   creator,
   width,
+  onDark = true,
 }: {
   creator: Creator;
   width?: number;
+  onDark?: boolean;
 }) {
+  const titleCls = onDark ? 'mt-md text-center text-brand-ivory' : 'mt-md text-center';
+  const captionCls = onDark ? 'text-center text-brand-ivory-soft' : 'text-center';
+  const regionCls = onDark ? 'mt-xs text-brand-terracotta' : 'mt-xs text-brand-primary';
+
   return (
     <Link href={`/creator/${creator.id}`} asChild>
       <MotiPressable
@@ -29,13 +35,13 @@ export function CreatorCard({
             radius={999}
             style={{ width: 96, height: 96 }}
           />
-          <AppText variant="title" className="mt-md text-center" numberOfLines={1}>
+          <AppText variant="title" className={titleCls} numberOfLines={1}>
             {creator.name}
           </AppText>
-          <AppText variant="caption" className="text-center" numberOfLines={1}>
+          <AppText variant="caption" className={captionCls} numberOfLines={1}>
             {creator.discipline}
           </AppText>
-          <AppText variant="label" className="mt-xs text-brand-primary">
+          <AppText variant="label" className={regionCls}>
             {creator.region}
           </AppText>
         </View>

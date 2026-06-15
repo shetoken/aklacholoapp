@@ -13,12 +13,14 @@ export function Tag({
   return (
     <View
       className={`rounded-full px-md py-xs ${
-        active ? 'bg-brand-primary' : 'bg-brand-surface-alt border border-brand-border'
+        active
+          ? 'bg-brand-marigold'
+          : 'bg-brand-surface border border-brand-border'
       }`}
     >
       <AppText
         variant="label"
-        className={active ? 'text-cream-50' : 'text-brand-ink-soft'}
+        className={active ? 'text-brand-ink' : 'text-brand-ivory-soft'}
       >
         {label}
       </AppText>

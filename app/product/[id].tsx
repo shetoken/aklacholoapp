@@ -22,7 +22,7 @@ import {
   getProductsByIds,
   getArticlesByIds,
 } from '@/services';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 export default function ProductDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -59,7 +59,7 @@ export default function ProductDetailScreen() {
       <View className="px-xl pt-lg">
         <View className="flex-row items-start justify-between">
           <View className="flex-1 pr-md">
-            <AppText variant="label" className="text-brand-primary mb-xs">
+            <AppText variant="label" className="text-brand-terracotta mb-xs">
               {p.category}
             </AppText>
             <AppText variant="h1">{p.title}</AppText>
@@ -73,7 +73,7 @@ export default function ProductDetailScreen() {
         </View>
 
         {p.priceLabel ? (
-          <AppText variant="h3" className="text-brand-primary mt-md">
+          <AppText variant="h3" className="text-brand-marigold mt-md">
             {p.priceLabel}
           </AppText>
         ) : null}
@@ -83,7 +83,7 @@ export default function ProductDetailScreen() {
 
       {/* The story */}
       <View className="px-xl">
-        <AppText variant="label" className="text-brand-primary mb-sm">
+        <AppText variant="label" className="text-brand-terracotta mb-sm">
           The story behind this
         </AppText>
         <AppText variant="bodyLg">{p.story}</AppText>
@@ -100,7 +100,7 @@ export default function ProductDetailScreen() {
       {/* Creator */}
       {creator.data ? (
         <View className="px-xl mt-2xl">
-          <AppText variant="label" className="text-brand-primary mb-sm">
+          <AppText variant="label" className="text-brand-terracotta mb-sm">
             Made by
           </AppText>
           <Link href={`/creator/${creator.data.id}`} asChild>
@@ -114,7 +114,7 @@ export default function ProductDetailScreen() {
                 <AppText variant="title">{creator.data.name}</AppText>
                 <AppText variant="caption">{creator.data.discipline}</AppText>
               </View>
-              <ChevronRight color={colors.ink.muted} />
+              <ChevronRight color={brand['ivory-muted']} />
             </Pressable>
           </Link>
         </View>
@@ -123,7 +123,7 @@ export default function ProductDetailScreen() {
       {/* Related stories */}
       {stories.data && stories.data.length > 0 ? (
         <View className="mt-2xl">
-          <AppText variant="label" className="text-brand-primary mb-sm px-xl">
+          <AppText variant="label" className="text-brand-terracotta mb-sm px-xl">
             Read more
           </AppText>
           {stories.data.map((a) => (
@@ -155,7 +155,7 @@ export default function ProductDetailScreen() {
                     {rp.title}
                   </AppText>
                   {rp.priceLabel ? (
-                    <AppText variant="label" className="text-brand-primary mt-xs">
+                    <AppText variant="label" className="text-brand-marigold mt-xs">
                       {rp.priceLabel}
                     </AppText>
                   ) : null}

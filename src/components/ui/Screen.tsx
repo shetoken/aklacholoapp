@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, View, type ScrollViewProps } from 'react-native';
 import { SafeAreaView, type Edge } from 'react-native-safe-area-context';
-import { colors } from '@/theme';
+import { colors, brand } from '@/theme';
 
 /**
  * Standard screen container with the brand background and safe-area handling.
@@ -15,19 +15,23 @@ export function Screen({
   children,
   scroll = false,
   edges = ['top'],
+  tone = 'dark',
   contentClassName = '',
   ...scrollProps
 }: {
   children: React.ReactNode;
   scroll?: boolean;
   edges?: Edge[];
-  /** Tailwind classes applied to the scroll content / inner view. */
+  /** `dark` — Kalighat indigo ground (app default). */
+  tone?: 'light' | 'dark';
   contentClassName?: string;
 } & ScrollViewProps) {
+  const bg = tone === 'dark' ? brand.indigo : colors.cream[200];
+
   return (
     <SafeAreaView
       edges={edges}
-      style={{ flex: 1, backgroundColor: colors.cream[200] }}
+      style={{ flex: 1, backgroundColor: bg }}
     >
       {scroll ? (
         <ScrollView

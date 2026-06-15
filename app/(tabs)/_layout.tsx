@@ -1,34 +1,35 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
-import { colors, fonts } from '@/theme';
+import { brand, fonts } from '@/theme';
 import {
   HomeIcon,
   CompassIcon,
-  CreatorsIcon,
-  HeartIcon,
+  MapPinIcon,
+  ShopIcon,
+  BriefcaseIcon,
 } from '@/components/ui/icons';
 
 /**
- * Bottom tab bar — the four main areas. All labels are plain English per the
- * brand naming convention (no pronunciation friction for a global audience).
+ * Bottom tab bar — Home · Discover · Experience · Shop · Hire
+ * Learn is a sub-tab inside Experience.
  */
 export default function TabsLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.terracotta[500],
-        tabBarInactiveTintColor: colors.ink.muted,
+        tabBarActiveTintColor: brand.marigold,
+        tabBarInactiveTintColor: '#8A8498',
         tabBarStyle: {
-          backgroundColor: colors.cream[50],
-          borderTopColor: colors.cream[400],
+          backgroundColor: brand.indigo,
+          borderTopColor: `${brand.ivory}22`,
           height: 64,
           paddingBottom: 8,
           paddingTop: 8,
         },
         tabBarLabelStyle: {
           fontFamily: fonts.sansMedium,
-          fontSize: 11,
+          fontSize: 10,
         },
       }}
     >
@@ -42,7 +43,7 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="discover"
+        name="explore"
         options={{
           title: 'Discover',
           tabBarIcon: ({ color, focused }) => (
@@ -51,23 +52,39 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="creators"
+        name="experience"
         options={{
-          title: 'Creators',
+          title: 'Experience',
           tabBarIcon: ({ color, focused }) => (
-            <CreatorsIcon color={color} filled={focused} />
+            <MapPinIcon color={color} filled={focused} />
           ),
         }}
       />
       <Tabs.Screen
-        name="saved"
+        name="shop"
         options={{
-          title: 'Saved',
+          title: 'Shop',
           tabBarIcon: ({ color, focused }) => (
-            <HeartIcon color={color} filled={focused} />
+            <ShopIcon color={color} filled={focused} />
           ),
         }}
       />
+      <Tabs.Screen
+        name="hire"
+        options={{
+          title: 'Hire',
+          tabBarIcon: ({ color, focused }) => (
+            <BriefcaseIcon color={color} filled={focused} />
+          ),
+        }}
+      />
+      {/* Hidden routes */}
+      <Tabs.Screen name="learn" options={{ href: null }} />
+      <Tabs.Screen name="discover" options={{ href: null }} />
+      <Tabs.Screen name="bengal" options={{ href: null }} />
+      <Tabs.Screen name="talent" options={{ href: null }} />
+      <Tabs.Screen name="creators" options={{ href: null }} />
+      <Tabs.Screen name="saved" options={{ href: null }} />
     </Tabs>
   );
 }

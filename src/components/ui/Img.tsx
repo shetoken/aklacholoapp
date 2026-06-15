@@ -2,7 +2,7 @@ import React from 'react';
 import { View, type ViewStyle } from 'react-native';
 import { Image, type ImageContentFit } from 'expo-image';
 import type { ImageRef } from '@/types';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 /**
  * expo-image wrapper. Keeps a tinted placeholder background while loading and
@@ -26,7 +26,7 @@ export function Img({
     <View
       className={className}
       style={[
-        { backgroundColor: colors.cream[300], overflow: 'hidden', borderRadius: radius },
+        { backgroundColor: brand.surface, overflow: 'hidden', borderRadius: radius },
         style,
       ]}
     >

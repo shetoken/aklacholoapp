@@ -1,9 +1,35 @@
 import type { Article, ArticleSection } from '@/types';
 import { articles } from '@/data';
+import { encyclopediaOrder } from '@/data/encyclopedia-articles';
 import { mockResponse, NotFoundError } from './api.client';
 
 export function getArticles(): Promise<Article[]> {
   return mockResponse(articles);
+}
+
+/** Encyclopedia rail — ordered for Home “Magic of Bengal” tiles. */
+export function getEncyclopediaArticles(): Promise<Article[]> {
+  const byId = new Map(articles.map((a) => [a.id, a]));
+  const ordered = encyclopediaOrder
+    .map((id) => byId.get(id))
+    .filter((a): a is Article => Boolean(a));
+  return mockResponse(ordered);
+}
+
+/** Filter articles by title, subtitle, summary, and tags (client-side helper). */
+export function filterArticles(items: Article[], query: string): Article[] {
+  const terms = query.toLowerCase().split(/\s+/).filter(Boolean);
+  if (terms.length === 0) return [];
+
+  return items.filter((article) => {
+    const haystack =
+      `${article.title} ${article.subtitle} ${article.summary} ${article.tags.join(' ')}`.toLowerCase();
+    return terms.every((term) => haystack.includes(term));
+  });
+}
+
+export function searchArticles(query: string): Promise<Article[]> {
+  return mockResponse(filterArticles(articles, query));
 }
 
 export async function getArticleById(id: string): Promise<Article> {

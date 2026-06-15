@@ -139,6 +139,89 @@ export interface Article {
 }
 
 // ----------------------------------------------------------------------------
+// Curated Experience — compact travel advisor style guidance
+// ----------------------------------------------------------------------------
+export interface ExperienceGuideContact {
+  name: string;
+  role: string;
+  phone: string;
+}
+
+export interface Experience {
+  id: ID;
+  title: string;
+  location: BengalRegion;
+  heroImage: ImageRef;
+  shortBlurb: string;
+  doTip: string;
+  dontTip: string;
+  guideContact: ExperienceGuideContact;
+  tags: string[];
+}
+
+// ----------------------------------------------------------------------------
+// Discover rails — festivals, calendar, palaces topic tiles
+// ----------------------------------------------------------------------------
+export interface DiscoverTopic {
+  id: ID;
+  title: string;
+  subtitle?: string;
+  image: ImageRef;
+  /** When set, tile navigates to this article. */
+  articleId?: ID;
+}
+
+export interface DiscoverRails {
+  festivals: DiscoverTopic[];
+  calendar: DiscoverTopic[];
+  palaces: DiscoverTopic[];
+}
+
+export interface LearnTopic {
+  id: ID;
+  title: string;
+  detail: string;
+  image: ImageRef;
+}
+
+// ----------------------------------------------------------------------------
+// Journey Through Bengal — unfolding map nodes
+// ----------------------------------------------------------------------------
+export type JourneyNodeStatus = 'locked' | 'current' | 'unlocked' | 'completed';
+
+/** Static node definition (status applied at runtime from progress). */
+export interface JourneyNodeDefinition {
+  id: ID;
+  title: string;
+  subtitle: string;
+  /** Maps to KolkaMotif svgKey. */
+  motifKey: string;
+  articleId: ID;
+  connections: ID[];
+  order: number;
+}
+
+export interface JourneyNode extends JourneyNodeDefinition {
+  status: JourneyNodeStatus;
+}
+
+export interface JourneyProgress {
+  currentNodeId: ID | null;
+  unlockedNodeIds: ID[];
+  completedNodeIds: ID[];
+  skippedOnboarding: boolean;
+  onboardingSeen: boolean;
+  rewardClaimed: boolean;
+  bonusUnlocked: boolean;
+}
+
+/** Phase 2 reward payload hook (Shop discount / early access). */
+export interface JourneyShopRewardHook {
+  type: 'shop_discount';
+  code: string | null;
+}
+
+// ----------------------------------------------------------------------------
 // Wishlist
 // ----------------------------------------------------------------------------
 export type WishlistKind = 'product' | 'collection' | 'creator';

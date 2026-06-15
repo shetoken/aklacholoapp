@@ -20,7 +20,7 @@ import { useAsync } from '@/hooks/useAsync';
 import { useWishlist } from '@/context/WishlistProvider';
 import { getProducts, getCollections, getCreators } from '@/services';
 import type { Product } from '@/types';
-import { colors } from '@/theme';
+import { brand } from '@/theme';
 
 const { width } = Dimensions.get('window');
 const COLUMN_W = (width - 48 - 16) / 2;
@@ -77,12 +77,12 @@ export default function SavedScreen() {
             title="Nothing saved yet"
             subtitle="Tap the heart on anything you love and it’ll wait for you here."
           />
-          <Link href="/discover" asChild>
+          <Link href="/explore" asChild>
             <Pressable className="flex-row items-center mt-md">
-              <AppText variant="label" className="text-brand-primary">
+              <AppText variant="label" className="text-brand-marigold">
                 Start discovering
               </AppText>
-              <ChevronRight color={colors.terracotta[500]} />
+              <ChevronRight color={brand.marigold} />
             </Pressable>
           </Link>
         </View>
@@ -128,7 +128,7 @@ export default function SavedScreen() {
                       <AppText variant="title">{creator.name}</AppText>
                       <AppText variant="caption">{creator.discipline}</AppText>
                     </View>
-                    <ChevronRight color={colors.ink.muted} />
+                    <ChevronRight color={brand['ivory-muted']} />
                   </Pressable>
                 </Link>
               ))}

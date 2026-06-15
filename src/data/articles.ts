@@ -1,16 +1,9 @@
 import type { Article } from '@/types';
 import { img } from '@/constants/images';
+import { encyclopediaArticles } from './encyclopedia-articles';
+import { journeyArticles } from './journey-articles';
 
-/**
- * "The Magic of Bengal" — storytelling content surfaced WITHIN Discover.
- *
- * RETRIEVAL-READY: each article carries a one-paragraph `summary` and an array
- * of `sections`, every section with a STABLE `id`. In Phase 1.5 a grounded chat
- * assistant can chunk on sections, retrieve the relevant ones, and answer using
- * ONLY this content — citing `${article.id}#${section.id}`. No chat is built
- * now; this is purely the clean, typed content layer it will read from.
- */
-export const articles: Article[] = [
+const coreArticles: Article[] = [
   // ==========================================================================
   // 1) What is Kolka?
   // ==========================================================================
@@ -185,4 +178,15 @@ export const articles: Article[] = [
     relatedProductIds: ['prod_terracotta_panel', 'prod_terracotta_planter'],
     tags: ['terracotta', 'bishnupur', 'temple', 'malla', 'craft'],
   },
+];
+
+/**
+ * "The Magic of Bengal" — storytelling + encyclopedia content surfaced in Discover
+ * and on Home. RETRIEVAL-READY: each article carries a `summary` and stable
+ * section ids for Phase 1.5 grounded chat (`articleId#sectionId` citations).
+ */
+export const articles: Article[] = [
+  ...coreArticles,
+  ...encyclopediaArticles,
+  ...journeyArticles,
 ];

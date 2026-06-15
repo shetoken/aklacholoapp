@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Pressable, ScrollView, View } from 'react-native';
-import { Link, Stack, useLocalSearchParams } from 'expo-router';
+import { Link, useLocalSearchParams } from 'expo-router';
+import { Stack } from 'expo-router';
 
 import {
   Screen,
@@ -14,16 +15,22 @@ import {
   ErrorView,
 } from '@/components';
 import { useAsync } from '@/hooks/useAsync';
+import { useJourney } from '@/context/JourneyProvider';
 import {
   getArticleById,
   getCollectionsByIds,
   getCreatorsByIds,
   getProductsByIds,
+  getJourneyNodeByArticleId,
 } from '@/services';
 import { APP } from '@/constants/app';
 
+const VIEW_MS = 2000;
+
 export default function ArticleDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const { markNodeViewed } = useJourney();
+  const markedRef = useRef(false);
   const article = useAsync(() => getArticleById(id), [id]);
 
   const collections = useAsync(
@@ -39,6 +46,31 @@ export default function ArticleDetailScreen() {
     [article.data?.id],
   );
 
+  useEffect(() => {
+    markedRef.current = false;
+  }, [id]);
+
+  useEffect(() => {
+    if (!article.data || markedRef.current) return;
+
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let cancelled = false;
+
+    getJourneyNodeByArticleId(article.data.id).then((node) => {
+      if (cancelled || !node || node.status === 'locked') return;
+      timer = setTimeout(() => {
+        if (markedRef.current) return;
+        markedRef.current = true;
+        markNodeViewed(node.id);
+      }, VIEW_MS);
+    });
+
+    return () => {
+      cancelled = true;
+      if (timer) clearTimeout(timer);
+    };
+  }, [article.data, markNodeViewed]);
+
   if (article.loading) return <Loading />;
   if (article.error || !article.data)
     return <ErrorView message="Story not found." />;
@@ -52,7 +84,7 @@ export default function ArticleDetailScreen() {
       <Img source={a.heroImage} className="w-full" style={{ height: 240 }} />
 
       <View className="px-xl pt-lg">
-        <AppText variant="label" className="text-brand-primary mb-xs">
+        <AppText variant="label" className="text-brand-terracotta mb-xs">
           {APP.storyLabel} · {a.readingMinutes} min read
         </AppText>
         <AppText variant="h1">{a.title}</AppText>
@@ -70,7 +102,6 @@ export default function ArticleDetailScreen() {
 
       <KolkaDivider />
 
-      {/* Related collections */}
       {collections.data && collections.data.length > 0 ? (
         <View className="mt-lg">
           <AppText variant="h3" className="px-xl mb-md">
@@ -88,7 +119,6 @@ export default function ArticleDetailScreen() {
         </View>
       ) : null}
 
-      {/* Related creators */}
       {creators.data && creators.data.length > 0 ? (
         <View className="mt-2xl">
           <AppText variant="h3" className="px-xl mb-md">
@@ -106,7 +136,6 @@ export default function ArticleDetailScreen() {
         </View>
       ) : null}
 
-      {/* Related products */}
       {products.data && products.data.length > 0 ? (
         <View className="mt-2xl">
           <AppText variant="h3" className="px-xl mb-md">

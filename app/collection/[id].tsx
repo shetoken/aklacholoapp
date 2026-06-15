@@ -67,7 +67,7 @@ export default function CollectionDetailScreen() {
       </View>
 
       <View className="px-xl pt-lg">
-        <AppText variant="label" className="text-brand-primary mb-xs">
+        <AppText variant="label" className="text-brand-terracotta mb-xs">
           Collection
         </AppText>
         <AppText variant="h1">{c.title}</AppText>
@@ -118,7 +118,7 @@ export default function CollectionDetailScreen() {
       {/* Related stories */}
       {stories.data && stories.data.length > 0 ? (
         <View className="mt-2xl">
-          <AppText variant="label" className="text-brand-primary mb-sm px-xl">
+          <AppText variant="label" className="text-brand-terracotta mb-sm px-xl">
             The story behind this
           </AppText>
           {stories.data.map((a) => (
